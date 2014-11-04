@@ -6,7 +6,7 @@ public class Class
 	
 	public Class(String n, String t)
 	{
-		name = n;
+		name = n; //testing
 		teacher = t;
 	}
 }
