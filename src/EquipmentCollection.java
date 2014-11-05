@@ -6,22 +6,26 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class EquipmentCollection
 {
 	private List<Equipment> equipList = new ArrayList<Equipment>();
 	boolean changed = false;
+	int number=0;
 	
 	public EquipmentCollection() 
 	{
 		try 
 		{
+			Scanner scan; 
 			BufferedReader reader = new BufferedReader(new FileReader("equipment.txt"));
 			String line=null;
 			while ((line = reader.readLine()) != null) 
 			{
-			    System.out.println(line);
+				scan = new Scanner(line);
+				add(scan.next(), scan.next());
 			}
 			reader.close();
 		}
@@ -39,9 +43,16 @@ public class EquipmentCollection
 		}
 	}
 
-	public void addEquipment(Equipment e)
+	private void add(String name, String desc)
 	{
-		equipList.add(e);
+		number++;
+		System.out.println(name+" added");
+		equipList.add(new Equipment(name, desc, number));
+	}
+	
+	public void addEquipment(String name, String desc)
+	{
+		add(name, desc);
 		changed = true;
 	}
 	public void removeEquipment()
@@ -50,7 +61,8 @@ public class EquipmentCollection
 	}
 	public String equipmentInfo()
 	{
-		return null;
+		
+		return equipList.toString();
 	}
 	
 	public void save()
@@ -60,10 +72,11 @@ public class EquipmentCollection
 			try
 			{
 				BufferedWriter out = new BufferedWriter(new FileWriter("equipment.txt"));
-				for(int i =0;i<equipList.size();i++)
+				int size = equipList.size();
+				for(int i =0;i<size;i++)
 				{
-					Equipment e = equipList.remove(i);
-					out.write(e.name+" "+e.description+"\n");
+					Equipment e = equipList.remove(0);
+					out.write(e.getName()+" "+e.getDesc()+"\n");
 				}
 				out.close();
 			} catch (IOException e) {

@@ -1,12 +1,27 @@
 
 public class Equipment 
 {
-	String name;
-	String description;
+	private String name;
+	private String description;
+	private int number;
 	
-	public Equipment(String n, String d)
+	public Equipment(String n, String d, int i)
 	{
 		name = n;
 		description = d;
+		number = i;
+	}
+	
+	public int getNumber()
+	{
+		return number;
+	}
+	public String getName()
+	{
+		return name;
+	}
+	public String getDesc()
+	{
+		return description;
 	}
 }
