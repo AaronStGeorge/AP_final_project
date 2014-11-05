@@ -13,7 +13,6 @@ public class EquipmentCollection
 {
 	private List<Equipment> equipList = new ArrayList<Equipment>();
 	boolean changed = false;
-	int number=0;
 	
 	public EquipmentCollection() 
 	{
@@ -45,9 +44,9 @@ public class EquipmentCollection
 
 	private void add(String name, String desc)
 	{
-		number++;
+
 		System.out.println(name+" added");
-		equipList.add(new Equipment(name, desc, number));
+		equipList.add(new Equipment(name, desc));
 	}
 	
 	public void addEquipment(String name, String desc)
