@@ -13,7 +13,7 @@ public class EquipmentCollection
 {
 	private List<Equipment> equipList = new ArrayList<Equipment>();
 	boolean changed = false;
-	
+	static int number;
 	public EquipmentCollection() 
 	{
 		try 
@@ -51,19 +51,24 @@ public class EquipmentCollection
 	
 	public void addEquipment(String name, String desc)
 	{
+		number++;
 		add(name, desc);
 		changed = true;
 	}
 	public void removeEquipment()
 	{
+		//TODO
 		changed = true;
 	}
 	public String equipmentInfo()
 	{
-		
-		return equipList.toString();
+		//TODO
+		return null;
 	}
-	
+	public int size()
+	{
+		return equipList.size();
+	}
 	public void save()
 	{
 		if(changed)
@@ -82,7 +87,7 @@ public class EquipmentCollection
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("changes saved");
+			System.out.println("Equipment changes saved");
 
 		}
 	}
