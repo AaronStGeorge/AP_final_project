@@ -13,7 +13,6 @@ public class EquipmentCollection
 {
 	private List<Equipment> equipList = new ArrayList<Equipment>();
 	boolean changed = false;
-	static int number;
 	public EquipmentCollection() 
 	{
 		try 
@@ -51,7 +50,6 @@ public class EquipmentCollection
 	
 	public void addEquipment(String name, String desc)
 	{
-		number++;
 		add(name, desc);
 		changed = true;
 	}

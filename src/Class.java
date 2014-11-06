@@ -2,16 +2,15 @@
 public class Class 
 {
 	private String name, teacher;
-	private int startTime, endTime, rotationTime, number;
+	private int startTime, endTime, rotationTime;
 	
-	public Class(String n, String t, int s, int e, int r, int i)
+	public Class(String n, String t, int s, int e, int r)
 	{
 		name = n; 
 		teacher = t;
 		startTime = s;
 		endTime = e;
-		rotationTime = r;
-		number = i;		
+		rotationTime = r;		
 	}
 	public String getName()
 	{
@@ -35,8 +34,5 @@ public class Class
 	{
 		return rotationTime;
 	}
-	public int getNumber()
-	{
-		return number;
-	}
+
 }

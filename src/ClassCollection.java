@@ -13,7 +13,6 @@ public class ClassCollection
 {
 	private List<Class> classList = new ArrayList<Class>();
 	boolean changed = false;
-	int number = EquipmentCollection.number;
 	String day;
 	public ClassCollection(String day) 
 	{
@@ -47,11 +46,28 @@ public class ClassCollection
 
 	private void add(String name, String desc,int s, int e, int r)
 	{
-		classList.add(new Class(name, desc, s,e,r,++number));
+		classList.add(new Class(name, desc, s,e,r));
 	}
 	public void addClass(String name, String desc, int s, int e, int r)
 	{
-		add(name, desc,s,e,r);
+		boolean added = false;
+		int i =0;
+		while(!added)
+		{
+			if(i==classList.size())
+			{
+				added=true;
+				classList.add(new Class(name, desc, s,e,r));
+			}
+			else if(s>classList.get(i).getStart())
+				i++;
+			else
+			{
+				added=true;
+				classList.add(i, new Class(name, desc, s,e,r));
+			}
+		}
+		
 		changed = true;
 	}
 	public void removeClass()
