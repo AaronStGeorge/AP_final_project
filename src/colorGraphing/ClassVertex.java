@@ -3,11 +3,11 @@ import java.util.ArrayList;
 
 import Scheduling.Class;
 
-public class classVertex 
+public class ClassVertex 
 {
 	private Class class1;
 	private ArrayList<Edge> edges;
-	public classVertex(Class c)
+	public ClassVertex(Class c)
 	{
 		class1 = c;
 		edges = new ArrayList<Edge>();
