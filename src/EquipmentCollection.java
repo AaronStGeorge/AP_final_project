@@ -5,13 +5,16 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 
 public class EquipmentCollection
 {
-	private List<Equipment> equipList = new ArrayList<Equipment>();
+	private HashMap<String, Equipment> equipList = new HashMap<String, Equipment>();
 	boolean changed = false;
 	public EquipmentCollection() 
 	{
@@ -45,7 +48,7 @@ public class EquipmentCollection
 	{
 
 		System.out.println(name+" added");
-		equipList.add(new Equipment(name, desc));
+		equipList.put(name, new Equipment(name, desc));
 	}
 	
 	public void addEquipment(String name, String desc)
@@ -63,6 +66,10 @@ public class EquipmentCollection
 		//TODO
 		return null;
 	}
+	public Object[] getEquipmentList()
+	{
+		return equipList.keySet().toArray();
+	}
 	public int size()
 	{
 		return equipList.size();
@@ -74,10 +81,10 @@ public class EquipmentCollection
 			try
 			{
 				BufferedWriter out = new BufferedWriter(new FileWriter("equipment.txt"));
-				int size = equipList.size();
-				for(int i =0;i<size;i++)
+				Iterator<String> keys = equipList.keySet().iterator();
+				while(keys.hasNext())
 				{
-					Equipment e = equipList.remove(0);
+					Equipment e = equipList.get(keys.next());
 					out.write(e.getName()+" "+e.getDesc()+"\n");
 				}
 				out.close();
