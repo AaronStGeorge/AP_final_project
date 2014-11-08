@@ -87,6 +87,10 @@ public class ClassCollection
 		
 		changed = true;
 	}
+	public Class getClass(int i)
+	{
+		return classList.get(i);
+	}
 	public void removeClass()
 	{
 		changed = true;
