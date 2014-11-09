@@ -1,4 +1,3 @@
-package builder.gui;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import javax.swing.JComboBox;
@@ -41,7 +40,7 @@ public class GUI extends JFrame{
 	public GUI(){
 		setTitle("Schedule Program");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 600);
+		setBounds(100, 100, 200, 575);
 		mainFrame();
 	}
 	
@@ -59,7 +58,7 @@ public class GUI extends JFrame{
 				classSched();
 			}
 		});
-		btnMonday.setBounds(96, 60, 130, 50);
+		btnMonday.setBounds(96, 100, 130, 50);
 		main.add(btnMonday);
 
 		JButton btnTuesday = new JButton("Tuesday");
