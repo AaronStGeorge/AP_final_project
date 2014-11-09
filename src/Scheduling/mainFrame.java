@@ -13,9 +13,9 @@ import java.awt.event.ActionEvent;
 public class mainFrame extends JFrame {
 
 	private static JPanel main;
-	static mainFrame frame1 = new mainFrame();
-	static classSched frame2 = new classSched();
-	static newEquip frame3 = new newEquip();
+	mainFrame frame1 = new mainFrame();
+	classSched frame2 = new classSched();
+	newEquip frame3 = new newEquip();
 
 	/**
 	 * Launch the application.
@@ -50,7 +50,6 @@ public class mainFrame extends JFrame {
 		btnMonday.addActionListener(new ActionListener() {
 			//action listener for Mon
 			public void actionPerformed(ActionEvent e) {
-				classSched frame2 = new classSched();
 				frame1.dispose();
 				frame2.setVisible(true);
 			}
@@ -62,7 +61,7 @@ public class mainFrame extends JFrame {
 		btnTuesday.addActionListener(new ActionListener() {
 			//action listener for Tues
 			public void actionPerformed(ActionEvent e) {
-				frame1.dispose();
+				frame1.setVisible(false);
 				frame2.setVisible(true);
 			}
 		});
@@ -73,7 +72,7 @@ public class mainFrame extends JFrame {
 		btnWednesday.addActionListener(new ActionListener() {
 			//action listener for Wed
 			public void actionPerformed(ActionEvent e) {
-				frame1.dispose();
+				frame1.setVisible(false);
 				frame2.setVisible(true);
 			}
 		});
@@ -84,7 +83,7 @@ public class mainFrame extends JFrame {
 		btnThursday.addActionListener(new ActionListener() {
 			//action listener for Thurs
 			public void actionPerformed(ActionEvent e) {
-				frame1.dispose();
+				frame1.setVisible(false);
 				frame2.setVisible(true);
 			}
 		});
@@ -95,7 +94,7 @@ public class mainFrame extends JFrame {
 		btnFriday.addActionListener(new ActionListener() {
 			//action listener for Fri
 			public void actionPerformed(ActionEvent e) {
-				frame1.dispose();
+				frame1.setVisible(false);
 				frame2.setVisible(true);
 			}
 		});

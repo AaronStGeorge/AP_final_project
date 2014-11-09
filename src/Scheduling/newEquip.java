@@ -18,32 +18,15 @@ public class newEquip extends JFrame {
 	
 	//create the variables
 	private static JPanel aEquip;
-	static mainFrame frame1 = new mainFrame();
-	static classSched frame2 = new classSched();
-	static newEquip frame3 = new newEquip();
+	mainFrame frame1 = new mainFrame();
+	classSched frame2 = new classSched();
+	newEquip frame3 = new newEquip();
 	private JTextField equipName;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					frame1.setVisible(false);
-					frame2.setVisible(false);
-					frame3.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
-	public void NewEquip() {
+	public NewEquip() {
 		setTitle("Add Equipment");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -83,7 +66,8 @@ public class newEquip extends JFrame {
 		btnCancel.addActionListener(new ActionListener() {
 			//action listener for the cancel button
 			public void actionPerformed(ActionEvent e) {
-				
+				frame3.dispose();
+				frame2.setVisible(true);
 			}
 		});
 		btnCancel.setBounds(316, 215, 89, 23);

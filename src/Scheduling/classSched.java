@@ -19,33 +19,16 @@ import java.awt.event.ActionEvent;
 public class classSched extends JFrame {
 
 	private static JPanel clSched;
-	static mainFrame frame1 = new mainFrame();
-	static classSched frame2 = new classSched();
-	static newEquip frame3 = new newEquip();
+	mainFrame frame1 = new mainFrame();
+	classSched frame2 = new classSched();
+	newEquip frame3 = new newEquip();
 	private JTextField textClass;
 	private JTextField textTeach;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					frame1.setVisible(false);
-					frame2.setVisible(true);
-					frame3.setVisible(false);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
-	public void classSched() {
+	public classSched() {
 		setTitle("Schedule A Class");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 560, 400);
