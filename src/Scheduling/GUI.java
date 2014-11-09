@@ -40,7 +40,7 @@ public class GUI extends JFrame{
 	public GUI(){
 		setTitle("Schedule Program");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 200, 575);
+		setBounds(100, 100, 575, 450);
 		mainFrame();
 	}
 	
@@ -49,6 +49,10 @@ public class GUI extends JFrame{
 		main.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(main);
 		main.setLayout(null);
+		
+		JLabel lblPickADay = new JLabel("Pick a day to schedule:");
+		lblPickADay.setBounds(200, 32, 168, 16);
+		main.add(lblPickADay);
 
 		JButton btnMonday = new JButton("Monday");
 		btnMonday.addActionListener(new ActionListener() {
@@ -58,7 +62,7 @@ public class GUI extends JFrame{
 				classSched();
 			}
 		});
-		btnMonday.setBounds(96, 100, 130, 50);
+		btnMonday.setBounds(200, 60, 130, 50);
 		main.add(btnMonday);
 
 		JButton btnTuesday = new JButton("Tuesday");
@@ -69,7 +73,7 @@ public class GUI extends JFrame{
 				classSched();
 			}
 		});
-		btnTuesday.setBounds(96, 109, 130, 50);
+		btnTuesday.setBounds(200, 109, 130, 50);
 		main.add(btnTuesday);
 
 		JButton btnWednesday = new JButton("Wednesday");
@@ -80,7 +84,7 @@ public class GUI extends JFrame{
 				classSched();
 			}
 		});
-		btnWednesday.setBounds(96, 160, 130, 50);
+		btnWednesday.setBounds(200, 160, 130, 50);
 		main.add(btnWednesday);
 
 		JButton btnThursday = new JButton("Thursday");
@@ -91,7 +95,7 @@ public class GUI extends JFrame{
 				classSched();
 			}
 		});
-		btnThursday.setBounds(96, 214, 130, 50);
+		btnThursday.setBounds(200, 214, 130, 50);
 		main.add(btnThursday);
 
 		JButton btnFriday = new JButton("Friday");
@@ -102,12 +106,8 @@ public class GUI extends JFrame{
 				classSched();
 			}
 		});
-		btnFriday.setBounds(96, 260, 130, 50);
+		btnFriday.setBounds(200, 260, 130, 50);
 		main.add(btnFriday);
-
-		JLabel lblPickADay = new JLabel("Pick a day to schedule:");
-		lblPickADay.setBounds(96, 32, 168, 16);
-		main.add(lblPickADay);
 	}
 	
 	//class scheduling frame
@@ -172,7 +172,7 @@ public class GUI extends JFrame{
 
 			}
 		});
-		btnSched.setBounds(22, 267, 195, 34);
+		btnSched.setBounds(22, 230, 195, 45);
 		clSched.add(btnSched);
 
 		JButton btnNewEquip = new JButton("New Equipment");
@@ -183,7 +183,7 @@ public class GUI extends JFrame{
 				newEquip();
 			}
 		});
-		btnNewEquip.setBounds(22, 220, 195, 34);
+		btnNewEquip.setBounds(330, 350, 195, 34);
 		clSched.add(btnNewEquip);
 		
 		JButton btnMenu = new JButton("Main Menu");
@@ -194,7 +194,7 @@ public class GUI extends JFrame{
 				mainFrame();
 			}
 		});
-		btnMenu.setBounds(22, 314, 195, 34);
+		btnMenu.setBounds(22, 350, 195, 34);
 		clSched.add(btnMenu);
 	}
 	
@@ -229,7 +229,7 @@ public class GUI extends JFrame{
 				
 			}
 		});
-		btnSubmit.setBounds(25, 215, 89, 23);
+		btnSubmit.setBounds(25, 215, 150, 40);
 		aEquip.add(btnSubmit);
 		
 		JButton btnCancel = new JButton("Cancel");
@@ -240,7 +240,7 @@ public class GUI extends JFrame{
 				classSched();
 			}
 		});
-		btnCancel.setBounds(316, 215, 89, 23);
+		btnCancel.setBounds(245, 215, 150, 40);
 		aEquip.add(btnCancel);
 	}
 
