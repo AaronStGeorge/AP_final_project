@@ -101,6 +101,16 @@ public class ClassCollection
 		return null;
 	}
 	
+	public Class[] getClasses()
+	{
+		Class[] classes = new Class[classList.size()];
+		for(int i =0;i<classList.size();i++)
+		{
+			classes[i]=classList.get(i);
+		}
+		return classes;
+	}
+	
 	public void save()
 	{
 		if(changed)
