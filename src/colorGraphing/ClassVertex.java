@@ -1,7 +1,7 @@
 package colorGraphing;
 import java.util.ArrayList;
 
-import Scheduling.Class;
+import scheduling.Class;
 
 public class ClassVertex 
 {
