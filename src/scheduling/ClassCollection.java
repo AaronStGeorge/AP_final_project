@@ -34,7 +34,7 @@ public class ClassCollection
 				start = scan.nextInt();//time is viewed as a normal time number from a digital watch minus the colon
 				end = scan.nextInt();//time is viewed as a normal time number from a digital watch minus the colon
 				rotation =scan.nextInt();//this should be in minutes
-				equip = new String[Time.timeOnEquipment(start, end, rotation)];
+				equip = new String[Time.numOfRotationsNeeded(start, end, rotation)];
 				for(int i =0;i<equip.length;i++)
 				{
 					equip[i]=scan.next();
