@@ -48,7 +48,7 @@ public class EquipmentCollection
 	private void add(String name, String desc)
 	{
 
-		System.out.println(name+" added");
+		//System.out.println(name+" added");
 		equipList.put(name, new Equipment(name, desc));
 	}
 	
@@ -67,9 +67,15 @@ public class EquipmentCollection
 		//TODO
 		return null;
 	}
-	public Object[] getEquipmentList()
+	public String[] getEquipmentList()
 	{
-		return equipList.keySet().toArray();
+		Object[] full = equipList.keySet().toArray();
+		String[] empty = new String[full.length];
+		for(int i =0;i<full.length;i++)
+		{
+			empty[i]=(String)full[i];
+		}
+		return empty;
 	}
 	public int size()
 	{
