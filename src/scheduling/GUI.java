@@ -1,10 +1,10 @@
-package scheduling;
-
 import java.awt.BorderLayout;
+import java.awt.Event;
 import java.awt.EventQueue;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -12,21 +12,31 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 
 public class GUI extends JFrame{
-	
+
 	//create variables
 	private static JPanel main;
 	private JPanel clSched;
 	private JPanel aEquip;
+	private JPanel dSched;
 	private JTextField textClass;
 	private JTextField textTeach;
 	private JTextField equipName;
-	
+	private JComboBox classBox;
+	private JComboBox schedBox;
+	private JTextArea txtClasses;
+	private JTextArea txtSched;
+	//testing vars
+	static ArrayList cNames = new ArrayList();
+	static ArrayList cSched = new ArrayList();
+
+	//start the GUI
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
-	
 			public void run() {
 				try {
 					GUI makeFrame = new GUI();
@@ -36,22 +46,28 @@ public class GUI extends JFrame{
 				}
 			}
 		});
+		//testing
+		for (int x=0; x < 10; x++){
+			cNames.add("Class " + x);
+		}
 	}
-	
-	//main frame
+
+	//create the main JFrame
 	public GUI(){
 		setTitle("Schedule Program");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 575, 450);
+		setBounds(100, 100, 595, 500);
 		mainFrame();
 	}
-	
+
+	//*******************************************************************************************************\\
+	//JPanel for day selection
 	public void mainFrame() {
 		main = new JPanel();
 		main.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(main);
 		main.setLayout(null);
-		
+
 		JLabel lblPickADay = new JLabel("Pick a day to schedule:");
 		lblPickADay.setBounds(200, 32, 168, 16);
 		main.add(lblPickADay);
@@ -61,7 +77,7 @@ public class GUI extends JFrame{
 			//action listener for Mon
 			public void actionPerformed(ActionEvent e) {
 				main.setVisible(false);
-				classSched();
+				daySched();
 			}
 		});
 		btnMonday.setBounds(200, 60, 130, 50);
@@ -72,7 +88,7 @@ public class GUI extends JFrame{
 			//action listener for Tues
 			public void actionPerformed(ActionEvent e) {
 				main.setVisible(false);
-				classSched();
+				daySched();
 			}
 		});
 		btnTuesday.setBounds(200, 109, 130, 50);
@@ -83,7 +99,7 @@ public class GUI extends JFrame{
 			//action listener for Wed
 			public void actionPerformed(ActionEvent e) {
 				main.setVisible(false);
-				classSched();
+				daySched();
 			}
 		});
 		btnWednesday.setBounds(200, 160, 130, 50);
@@ -94,7 +110,7 @@ public class GUI extends JFrame{
 			//action listener for Thurs
 			public void actionPerformed(ActionEvent e) {
 				main.setVisible(false);
-				classSched();
+				daySched();
 			}
 		});
 		btnThursday.setBounds(200, 214, 130, 50);
@@ -105,13 +121,112 @@ public class GUI extends JFrame{
 			//action listener for Fri
 			public void actionPerformed(ActionEvent e) {
 				main.setVisible(false);
-				classSched();
+				daySched();
 			}
 		});
 		btnFriday.setBounds(200, 260, 130, 50);
 		main.add(btnFriday);
 	}
-	
+
+	//*******************************************************************************************************\\	
+	//JPanel for the day scheduling
+	public void daySched() {
+		dSched = new JPanel();
+		dSched.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(dSched);
+		dSched.setLayout(null);
+		
+		JButton btnAdd = new JButton("Add -->");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//String selected = (String) classBox.getSelectedItem().toString();
+				//System.out.println(selected);
+				repaint();
+			}
+		});
+		btnAdd.setBounds(224, 69, 127, 37);
+		dSched.add(btnAdd);
+
+		JButton btnRemove = new JButton("Remove");
+		btnRemove.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//cSched.remove(schedBox.getSelectedItem());
+				repaint();
+			}
+		});
+		btnRemove.setBounds(224, 119, 127, 37);
+		dSched.add(btnRemove);
+
+		JButton btnSchedule = new JButton("Schedule!");
+		btnSchedule.addActionListener(new ActionListener() {
+			//pass class list onto the scheduling section of the program
+			public void actionPerformed(ActionEvent arg0) {
+
+			}
+		});
+		btnSchedule.setBounds(12, 376, 200, 61);
+		dSched.add(btnSchedule);
+
+		JButton btnNewClass = new JButton("New Class");
+		btnNewClass.addActionListener(new ActionListener() {
+			//create a new class
+			public void actionPerformed(ActionEvent arg0) {
+				dSched.setVisible(false);
+				classSched();
+			}
+		});
+		btnNewClass.setBounds(224, 278, 127, 37);
+		dSched.add(btnNewClass);
+
+		JButton btnDeleteClass = new JButton("Delete Class");
+		btnDeleteClass.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+			}
+		});
+		btnDeleteClass.setBounds(224, 328, 127, 37);
+		dSched.add(btnDeleteClass);
+
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dSched.setVisible(false);
+				mainFrame();
+			}
+		});
+		btnCancel.setBounds(363, 376, 200, 61);
+		dSched.add(btnCancel);
+
+		JComboBox classBox = new JComboBox();
+		classBox.setBounds(12, 13, 200, 37);
+		dSched.add(classBox);
+		for (int x=0; x < cNames.size(); x++){
+			classBox.addItem(cNames.get(x));
+		}
+
+		JComboBox schedBox = new JComboBox();
+		schedBox.setBounds(363, 13, 200, 37);
+		dSched.add(schedBox);
+		for (int x=0; x < cNames.size(); x++){
+			schedBox.addItem(cNames.get(x));
+		}
+
+		JTextArea txtClasses = new JTextArea();
+		txtClasses.setBounds(12, 63, 200, 302);
+		dSched.add(txtClasses);
+		for (int x=0; x < cNames.size(); x++){
+			txtClasses.append((String) cNames.get(x) + "\n");
+		}
+
+		JTextArea txtSched = new JTextArea();
+		txtSched.setBounds(363, 63, 200, 300);
+		dSched.add(txtSched);
+		for (int x=0; x < cNames.size(); x++){
+			txtSched.append((String) cNames.get(x) + "\n");
+		}
+	}
+
+	//*******************************************************************************************************\\	
 	//class scheduling frame
 	public void classSched() {
 		clSched = new JPanel();
@@ -187,53 +302,54 @@ public class GUI extends JFrame{
 		});
 		btnNewEquip.setBounds(330, 350, 195, 34);
 		clSched.add(btnNewEquip);
-		
-		JButton btnMenu = new JButton("Main Menu");
+
+		JButton btnMenu = new JButton("Back");
 		btnMenu.addActionListener(new ActionListener() {
 			//action listener for the menu button
 			public void actionPerformed(ActionEvent e) {
 				clSched.setVisible(false);
-				mainFrame();
+				daySched();
 			}
 		});
 		btnMenu.setBounds(22, 350, 195, 34);
 		clSched.add(btnMenu);
 	}
-	
+
+	//*******************************************************************************************************\\	
 	//new equipment frame
 	public void newEquip() {
 		aEquip = new JPanel();
 		aEquip.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(aEquip);
 		aEquip.setLayout(null);
-		
+
 		JLabel lblNewEquipmentName = new JLabel("New Equipment Name:");
 		lblNewEquipmentName.setBounds(25, 22, 169, 14);
 		aEquip.add(lblNewEquipmentName);
-		
+
 		equipName = new JTextField();
 		equipName.setBounds(25, 47, 169, 20);
 		aEquip.add(equipName);
 		equipName.setColumns(10);
-		
+
 		JLabel lblShortDescription = new JLabel("Short Description:");
 		lblShortDescription.setBounds(25, 78, 169, 14);
 		aEquip.add(lblShortDescription);
-		
+
 		JTextArea equipDesc = new JTextArea();
 		equipDesc.setBounds(25, 103, 380, 88);
 		aEquip.add(equipDesc);
-		
+
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
 			//action listener for submit button
 			public void actionPerformed(ActionEvent e) {
-				
+
 			}
 		});
 		btnSubmit.setBounds(25, 215, 150, 40);
 		aEquip.add(btnSubmit);
-		
+
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			//action listener for the cancel button
