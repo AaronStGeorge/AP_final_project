@@ -27,6 +27,7 @@ public class GUI extends JFrame{
 	private JTextField equipName;
 	private JTextArea txtClasses;
 	private JTextArea txtSched;
+	static int day;
 	//testing vars
 	static ArrayList<String> cNames = new ArrayList();
 	static ArrayList<String> cSched = new ArrayList();
@@ -66,62 +67,67 @@ public class GUI extends JFrame{
 		main.setLayout(null);
 
 		JLabel lblPickADay = new JLabel("Pick a day to schedule:");
-		lblPickADay.setBounds(200, 32, 168, 16);
+		lblPickADay.setBounds(230, 32, 168, 16);
 		main.add(lblPickADay);
 
 		JButton btnMonday = new JButton("Monday");
 		btnMonday.addActionListener(new ActionListener() {
 			//action listener for Mon
 			public void actionPerformed(ActionEvent e) {
+				day = 0;
 				main.setVisible(false);
 				daySched();
 			}
 		});
-		btnMonday.setBounds(200, 60, 130, 50);
+		btnMonday.setBounds(230, 60, 130, 50);
 		main.add(btnMonday);
 
 		JButton btnTuesday = new JButton("Tuesday");
 		btnTuesday.addActionListener(new ActionListener() {
 			//action listener for Tues
 			public void actionPerformed(ActionEvent e) {
+				day = 1;
 				main.setVisible(false);
 				daySched();
 			}
 		});
-		btnTuesday.setBounds(200, 109, 130, 50);
+		btnTuesday.setBounds(230, 109, 130, 50);
 		main.add(btnTuesday);
 
 		JButton btnWednesday = new JButton("Wednesday");
 		btnWednesday.addActionListener(new ActionListener() {
 			//action listener for Wed
 			public void actionPerformed(ActionEvent e) {
+				day = 2;
 				main.setVisible(false);
 				daySched();
 			}
 		});
-		btnWednesday.setBounds(200, 160, 130, 50);
+		btnWednesday.setBounds(230, 160, 130, 50);
 		main.add(btnWednesday);
 
 		JButton btnThursday = new JButton("Thursday");
 		btnThursday.addActionListener(new ActionListener() {
 			//action listener for Thurs
 			public void actionPerformed(ActionEvent e) {
+				day = 3;
 				main.setVisible(false);
 				daySched();
 			}
 		});
-		btnThursday.setBounds(200, 214, 130, 50);
+		btnThursday.setBounds(230, 214, 130, 50);
 		main.add(btnThursday);
 
 		JButton btnFriday = new JButton("Friday");
 		btnFriday.addActionListener(new ActionListener() {
 			//action listener for Fri
 			public void actionPerformed(ActionEvent e) {
+				day = 4;
 				main.setVisible(false);
 				daySched();
 			}
 		});
-		btnFriday.setBounds(200, 260, 130, 50);
+		btnFriday.setBounds(230, 260, 130, 50);
 		main.add(btnFriday);
 	}
 
