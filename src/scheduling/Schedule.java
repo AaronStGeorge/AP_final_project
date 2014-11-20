@@ -15,7 +15,10 @@ public class Schedule
 	int[][][] schedule;
 	String[] equipList;
 	Class[] classes;
-	
+	/*
+	 * The constructor needs the list of classes that need to be scheduled and also the equipment list
+	 * from EquipmentCollection.
+	 */
 	public Schedule( String[] equipList, Class[] classes)
 	{
 		this.equipList = equipList;
@@ -43,7 +46,12 @@ public class Schedule
 			start =Time.numOfRotationsNeeded(startTime, classes[i].getStart(), 15);
 			for(int j =0;j<time;j++)
 			{
-				schedule[(start+j)][i]=indexes;
+				if(classes[i].getRotation()==30 && j%2==1)
+				{
+					//do nothing because it has a 30 min rotation
+				}
+				else
+					schedule[(start+j)][i]=indexes;
 			}
 		}
 	}
