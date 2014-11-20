@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-
 import javax.swing.JFrame;
 
 public class GUI extends JFrame{
@@ -26,13 +25,11 @@ public class GUI extends JFrame{
 	private JTextField textClass;
 	private JTextField textTeach;
 	private JTextField equipName;
-	private JComboBox classBox;
-	private JComboBox schedBox;
 	private JTextArea txtClasses;
 	private JTextArea txtSched;
 	//testing vars
-	static ArrayList cNames = new ArrayList();
-	static ArrayList cSched = new ArrayList();
+	static ArrayList<String> cNames = new ArrayList();
+	static ArrayList<String> cSched = new ArrayList();
 
 	//start the GUI
 	public static void main(String[] args) {
@@ -136,21 +133,60 @@ public class GUI extends JFrame{
 		setContentPane(dSched);
 		dSched.setLayout(null);
 		
+		final JComboBox<String> classBox = new JComboBox<String>();
+		classBox.setBounds(12, 13, 200, 37);
+		dSched.add(classBox);
+		for (int x=0; x < cNames.size(); x++){
+			classBox.addItem(cNames.get(x).toString());
+		}
+
+		final JComboBox<String> schedBox = new JComboBox<String>();
+		schedBox.setBounds(363, 13, 200, 37);
+		dSched.add(schedBox);
+		for (int x=0; x < cSched.size(); x++){
+			schedBox.addItem(cSched.get(x).toString());
+		}
+
+		final JTextArea txtClasses = new JTextArea();
+		txtClasses.setBounds(12, 63, 200, 302);
+		dSched.add(txtClasses);
+		for (int x=0; x < cNames.size(); x++){
+			txtClasses.append((String) cNames.get(x).toString() + "\n");
+		}
+
+		final JTextArea txtSched = new JTextArea();
+		txtSched.setBounds(363, 63, 200, 300);
+		dSched.add(txtSched);
+		for (int x=0; x < cSched.size(); x++){
+			txtSched.append((String) cSched.get(x).toString() + "\n");
+		}
+		
 		JButton btnAdd = new JButton("Add -->");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//String selected = (String) classBox.getSelectedItem().toString();
-				//System.out.println(selected);
+				cSched.add(classBox.getSelectedItem().toString());
+				schedBox.addItem(classBox.getSelectedItem().toString());
+				txtSched.append(classBox.getSelectedItem().toString() + "\n");
 				repaint();
 			}
 		});
 		btnAdd.setBounds(224, 69, 127, 37);
 		dSched.add(btnAdd);
-
+		
 		JButton btnRemove = new JButton("Remove");
 		btnRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//cSched.remove(schedBox.getSelectedItem());
+				cSched.remove(schedBox.getSelectedItem());
+				//redraw the comboBox
+				schedBox.removeAllItems();
+				for (int x=0; x < cSched.size(); x++){
+					schedBox.addItem(cSched.get(x).toString());
+				}
+				//redraw the textarea items
+				txtSched.setText("");
+				for (int x=0; x < cSched.size(); x++){
+					txtSched.append((String) cSched.get(x).toString() + "\n");
+				}
 				repaint();
 			}
 		});
@@ -186,7 +222,7 @@ public class GUI extends JFrame{
 		});
 		btnDeleteClass.setBounds(224, 328, 127, 37);
 		dSched.add(btnDeleteClass);
-
+		
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -196,34 +232,6 @@ public class GUI extends JFrame{
 		});
 		btnCancel.setBounds(363, 376, 200, 61);
 		dSched.add(btnCancel);
-
-		JComboBox classBox = new JComboBox();
-		classBox.setBounds(12, 13, 200, 37);
-		dSched.add(classBox);
-		for (int x=0; x < cNames.size(); x++){
-			classBox.addItem(cNames.get(x));
-		}
-
-		JComboBox schedBox = new JComboBox();
-		schedBox.setBounds(363, 13, 200, 37);
-		dSched.add(schedBox);
-		for (int x=0; x < cNames.size(); x++){
-			schedBox.addItem(cNames.get(x));
-		}
-
-		JTextArea txtClasses = new JTextArea();
-		txtClasses.setBounds(12, 63, 200, 302);
-		dSched.add(txtClasses);
-		for (int x=0; x < cNames.size(); x++){
-			txtClasses.append((String) cNames.get(x) + "\n");
-		}
-
-		JTextArea txtSched = new JTextArea();
-		txtSched.setBounds(363, 63, 200, 300);
-		dSched.add(txtSched);
-		for (int x=0; x < cNames.size(); x++){
-			txtSched.append((String) cNames.get(x) + "\n");
-		}
 	}
 
 	//*******************************************************************************************************\\	
