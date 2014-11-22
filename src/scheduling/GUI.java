@@ -66,7 +66,7 @@ public class GUI extends JFrame{
 		setContentPane(main);
 		main.setLayout(null);
 
-		JLabel lblPickADay = new JLabel("Pick a day to schedule:");
+		JLabel lblPickADay = new JLabel("Pick a day to possibilities:");
 		lblPickADay.setBounds(230, 32, 168, 16);
 		main.add(lblPickADay);
 
@@ -298,7 +298,7 @@ public class GUI extends JFrame{
 
 		JButton btnSched = new JButton("Schedule!");
 		btnSched.addActionListener(new ActionListener() {
-			//action listener for the schedule button
+			//action listener for the possibilities button
 			public void actionPerformed(ActionEvent e) {
 
 			}

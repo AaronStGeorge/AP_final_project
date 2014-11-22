@@ -1,23 +1,31 @@
 package scheduling;
 
-public class test 
+import java.util.Arrays;
+
+public class test
 {
+
 	public static void main(String args[])
 	{
+
 		ClassCollection c = new ClassCollection("monday");
-		String[] e ={"bars","floor","rings","tramp"};
-		c.addClass("mmv", "asdfu", 1415, 1615, 15,e );
-		c.addClass("mm", "asdf", 1300, 1400, 30,e );
-		c.addClass("im", "asdfx", 1330, 1500, 15,e );
-		c.addClass("imx", "asdfx", 1015, 1545, 30,e );
-		c.addClass("imm", "dfgk", 1000, 1630, 15, e);
-			
+		String[] e  ={"bars","floor","rings","tramp"};
+		String[] e1 ={"floor","rings"};
+		String[] e2 ={"bars","tramp"};
+
+		c.addClass("mmv", "asdfu",  900, 1000, 15 ,e);
+		c.addClass("mm",  "asdf",   915, 1015, 30 ,e1);
+		c.addClass("im",  "asdfx",  915, 1015, 15 ,e);
+		c.addClass("imx", "asdfx", 1000, 1100, 30 ,e2);
+
 		EquipmentCollection eq = new EquipmentCollection();
-		eq.addEquipment("rings", "asdf");
 		eq.addEquipment("bars", "asdf");
 		eq.addEquipment("floor", "asdf");
+		eq.addEquipment("rings", "asdf");
 		eq.addEquipment("tramp", "asdf");
+
 		int test = 2;
+
 		if(test == 1)
 		{			
 			
@@ -33,6 +41,8 @@ public class test
 		else if(test == 2)
 		{
 			Schedule s = new Schedule(eq.getEquipmentList(), c.getClasses());
+			//System.out.println(Arrays.toString(s.position(4)));
+			//System.out.println(s.pastEndOfGrid(20));
 		}
 
 		
