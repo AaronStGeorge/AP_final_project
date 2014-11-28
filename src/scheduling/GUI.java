@@ -22,11 +22,6 @@ public class GUI extends JFrame{
 	private JPanel clSched;
 	private JPanel aEquip;
 	private JPanel dSched;
-	private JTextField textClass;
-	private JTextField textTeach;
-	private JTextField equipName;
-	private JTextArea txtClasses;
-	private JTextArea txtSched;
 	static int day;
 	//testing vars
 	static ArrayList<String> cNames = new ArrayList();
@@ -44,9 +39,10 @@ public class GUI extends JFrame{
 				}
 			}
 		});
-		//testing
-		for (int x=0; x < 10; x++){
-			cNames.add("Class " + x);
+		ClassCollection clCol = new ClassCollection();
+		String[] clNames = clCol.getClasses();
+		for (int x=0; x < clNames.length(); x++){
+			cNames.add(clNames[x]);
 		}
 	}
 
@@ -66,8 +62,8 @@ public class GUI extends JFrame{
 		setContentPane(main);
 		main.setLayout(null);
 
-		JLabel lblPickADay = new JLabel("Pick a day to possibilities:");
-		lblPickADay.setBounds(230, 32, 168, 16);
+		JLabel lblPickADay = new JLabel("Pick a day to schedule:");
+		lblPickADay.setBounds(235, 32, 168, 16);
 		main.add(lblPickADay);
 
 		JButton btnMonday = new JButton("Monday");
@@ -79,7 +75,7 @@ public class GUI extends JFrame{
 				daySched();
 			}
 		});
-		btnMonday.setBounds(230, 60, 130, 50);
+		btnMonday.setBounds(200, 60, 200, 75);
 		main.add(btnMonday);
 
 		JButton btnTuesday = new JButton("Tuesday");
@@ -91,7 +87,7 @@ public class GUI extends JFrame{
 				daySched();
 			}
 		});
-		btnTuesday.setBounds(230, 109, 130, 50);
+		btnTuesday.setBounds(200, 135, 200, 75);
 		main.add(btnTuesday);
 
 		JButton btnWednesday = new JButton("Wednesday");
@@ -103,7 +99,7 @@ public class GUI extends JFrame{
 				daySched();
 			}
 		});
-		btnWednesday.setBounds(230, 160, 130, 50);
+		btnWednesday.setBounds(200, 210, 200, 75);
 		main.add(btnWednesday);
 
 		JButton btnThursday = new JButton("Thursday");
@@ -115,7 +111,7 @@ public class GUI extends JFrame{
 				daySched();
 			}
 		});
-		btnThursday.setBounds(230, 214, 130, 50);
+		btnThursday.setBounds(200, 285, 200, 75);
 		main.add(btnThursday);
 
 		JButton btnFriday = new JButton("Friday");
@@ -127,7 +123,7 @@ public class GUI extends JFrame{
 				daySched();
 			}
 		});
-		btnFriday.setBounds(230, 260, 130, 50);
+		btnFriday.setBounds(200, 360, 200, 75);
 		main.add(btnFriday);
 	}
 
@@ -248,38 +244,56 @@ public class GUI extends JFrame{
 		setContentPane(clSched);
 		clSched.setLayout(null);
 
-		textClass = new JTextField();
-		textClass.setBounds(100, 28, 160, 22);
+		JTextField textClass = new JTextField();
+		textClass.setBounds(100, 15, 160, 30);
 		clSched.add(textClass);
 		textClass.setColumns(10);
 
 		JLabel lblClassName = new JLabel("Class name:");
-		lblClassName.setBounds(12, 31, 84, 16);
+		lblClassName.setBounds(12, 15, 84, 30);
 		clSched.add(lblClassName);
 
-		textTeach = new JTextField();
-		textTeach.setBounds(100, 57, 160, 22);
-		clSched.add(textTeach);
-		textTeach.setColumns(10);
-
-		JLabel lblInstructor = new JLabel("Instructor:");
-		lblInstructor.setBounds(12, 60, 84, 16);
-		clSched.add(lblInstructor);
-
 		JTextArea classDesc = new JTextArea();
-		classDesc.setBounds(12, 121, 248, 78);
+		classDesc.setBounds(12, 75, 248, 125);
 		clSched.add(classDesc);
 
 		JLabel lblClassDescription = new JLabel("Class description:");
-		lblClassDescription.setBounds(12, 92, 195, 16);
+		lblClassDescription.setBounds(12, 50, 195, 16);
 		clSched.add(lblClassDescription);
 
+		JTextField textS = new JTextField();
+		textS.setBounds(75, 215, 160, 30);
+		clSched.add(textS);
+		textS.setColumns(10);
+
+		JLabel lblS = new JLabel("Start:");
+		lblS.setBounds(12, 215, 84, 30);
+		clSched.add(lblS);
+		
+		JTextField textE = new JTextField();
+		textE.setBounds(75, 250, 160, 30);
+		clSched.add(textE);
+		textE.setColumns(10);
+
+		JLabel lblE = new JLabel("End:");
+		lblE.setBounds(12, 250, 84, 30);
+		clSched.add(lblE);
+		
+		JTextField textR = new JTextField();
+		textR.setBounds(75, 285, 160, 30);
+		clSched.add(textR);
+		textR.setColumns(10);
+
+		JLabel lblR = new JLabel("Rotations:");
+		lblR.setBounds(12, 285, 84, 30);
+		clSched.add(lblR);
+		
 		JComboBox comboBoxEquip = new JComboBox();
 		comboBoxEquip.setBounds(324, 57, 200, 22);
 		clSched.add(comboBoxEquip);
 
 		JTextArea equipAdded = new JTextArea();
-		equipAdded.setBounds(324, 121, 200, 200);
+		equipAdded.setBounds(305, 120, 230, 200);
 		clSched.add(equipAdded);
 
 		JLabel lblEquipmentNeeded = new JLabel("Equipment needed:");
@@ -293,30 +307,19 @@ public class GUI extends JFrame{
 
 			}
 		});
-		btnAdd.setBounds(377, 88, 97, 25);
+		btnAdd.setBounds(310, 88, 97, 25);
 		clSched.add(btnAdd);
-
-		JButton btnSched = new JButton("Schedule!");
-		btnSched.addActionListener(new ActionListener() {
-			//action listener for the possibilities button
+		
+		JButton btnRem = new JButton("Remove");
+		btnRem.addActionListener(new ActionListener() {
+			//action listener for the add button (to add from drop down box to the text area)
 			public void actionPerformed(ActionEvent e) {
 
 			}
 		});
-		btnSched.setBounds(22, 230, 195, 45);
-		clSched.add(btnSched);
-
-		JButton btnNewEquip = new JButton("New Equipment");
-		btnNewEquip.addActionListener(new ActionListener() {
-			//action listener for new equip button
-			public void actionPerformed(ActionEvent arg0) {
-				clSched.setVisible(false);
-				newEquip();
-			}
-		});
-		btnNewEquip.setBounds(330, 350, 195, 34);
-		clSched.add(btnNewEquip);
-
+		btnRem.setBounds(430, 88, 97, 25);
+		clSched.add(btnRem);
+		
 		JButton btnMenu = new JButton("Back");
 		btnMenu.addActionListener(new ActionListener() {
 			//action listener for the menu button
@@ -327,6 +330,38 @@ public class GUI extends JFrame{
 		});
 		btnMenu.setBounds(22, 350, 195, 34);
 		clSched.add(btnMenu);
+		
+		JButton btnSched = new JButton("Schedule!");
+		btnSched.addActionListener(new ActionListener() {
+			//action listener for the schedule button
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+		btnSched.setBounds(22, 400, 195, 34);
+		clSched.add(btnSched);
+
+		JButton btnNewEquip = new JButton("New Equipment");
+		btnNewEquip.addActionListener(new ActionListener() {
+			//action listener for new equip button
+			public void actionPerformed(ActionEvent arg0) {
+				clSched.setVisible(false);
+				newEquip();
+			}
+		});
+		btnNewEquip.setBounds(330, 350, 195, 34); 
+		clSched.add(btnNewEquip);
+		
+
+		JButton btnDelEquip = new JButton("Delete Equipment");
+		btnDelEquip.addActionListener(new ActionListener() {
+			//action listener for delete equip button
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		btnDelEquip.setBounds(330, 400, 195, 34); 
+		clSched.add(btnDelEquip);
 	}
 
 	//*******************************************************************************************************\\	
@@ -341,7 +376,7 @@ public class GUI extends JFrame{
 		lblNewEquipmentName.setBounds(25, 22, 169, 14);
 		aEquip.add(lblNewEquipmentName);
 
-		equipName = new JTextField();
+		JTextField equipName = new JTextField();
 		equipName.setBounds(25, 47, 169, 20);
 		aEquip.add(equipName);
 		equipName.setColumns(10);
