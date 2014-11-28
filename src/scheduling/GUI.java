@@ -24,8 +24,11 @@ public class GUI extends JFrame{
 	private JPanel dSched;
 	static int day;
 	//testing vars
-	static ArrayList<String> cNames = new ArrayList();
-	static ArrayList<String> cSched = new ArrayList();
+	static ArrayList<Class> cNames = new ArrayList();
+	static ArrayList<Class> cSched = new ArrayList();
+	static ArrayList<Equip> allEquip = new ArrayList();
+	static ArrayList<Equip> ndEquip = new ArrayList();
+	
 
 	//start the GUI
 	public static void main(String[] args) {
@@ -43,6 +46,12 @@ public class GUI extends JFrame{
 		String[] clNames = clCol.getClasses();
 		for (int x=0; x < clNames.length(); x++){
 			cNames.add(clNames[x]);
+		}
+		
+		EquipmentCollection eqCol = new EquipmentCollection();
+		String[] eqNames = eqCol.getEquipmentList();
+		for (int x=0; x < eqNames.length(); x++){
+			allEquip.add(eqNames[x]);
 		}
 	}
 
@@ -139,34 +148,34 @@ public class GUI extends JFrame{
 		classBox.setBounds(12, 13, 200, 37);
 		dSched.add(classBox);
 		for (int x=0; x < cNames.size(); x++){
-			classBox.addItem(cNames.get(x).toString());
+			classBox.addItem(cNames.get(x).getName());
 		}
 
 		final JComboBox<String> schedBox = new JComboBox<String>();
 		schedBox.setBounds(363, 13, 200, 37);
 		dSched.add(schedBox);
 		for (int x=0; x < cSched.size(); x++){
-			schedBox.addItem(cSched.get(x).toString());
+			schedBox.addItem(cSched.get(x).getName());
 		}
 
 		final JTextArea txtClasses = new JTextArea();
 		txtClasses.setBounds(12, 63, 200, 302);
 		dSched.add(txtClasses);
 		for (int x=0; x < cNames.size(); x++){
-			txtClasses.append((String) cNames.get(x).toString() + "\n");
+			txtClasses.append((String) cNames.get(x).getName() + "\n");
 		}
 
 		final JTextArea txtSched = new JTextArea();
 		txtSched.setBounds(363, 63, 200, 300);
 		dSched.add(txtSched);
 		for (int x=0; x < cSched.size(); x++){
-			txtSched.append((String) cSched.get(x).toString() + "\n");
+			txtSched.append((String) cSched.get(x).getName() + "\n");
 		}
 		
 		JButton btnAdd = new JButton("Add -->");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cSched.add(classBox.getSelectedItem().toString());
+				cSched.add(classBox.getSelectedItem());
 				schedBox.addItem(classBox.getSelectedItem().toString());
 				txtSched.append(classBox.getSelectedItem().toString() + "\n");
 				repaint();
@@ -182,12 +191,12 @@ public class GUI extends JFrame{
 				//redraw the comboBox
 				schedBox.removeAllItems();
 				for (int x=0; x < cSched.size(); x++){
-					schedBox.addItem(cSched.get(x).toString());
+					schedBox.addItem(cSched.get(x).getName());
 				}
 				//redraw the textarea items
 				txtSched.setText("");
 				for (int x=0; x < cSched.size(); x++){
-					txtSched.append((String) cSched.get(x).toString() + "\n");
+					txtSched.append((String) cSched.get(x).getName() + "\n");
 				}
 				repaint();
 			}
@@ -304,7 +313,9 @@ public class GUI extends JFrame{
 		btnAdd.addActionListener(new ActionListener() {
 			//action listener for the add button (to add from drop down box to the text area)
 			public void actionPerformed(ActionEvent e) {
-
+				ndEquip.add(comboBoxEquip.getSelectedItem());
+				equipAdded.append(classBox.getSelectedItem().getName() + "\n");
+				repaint();
 			}
 		});
 		btnAdd.setBounds(310, 88, 97, 25);
@@ -314,7 +325,18 @@ public class GUI extends JFrame{
 		btnRem.addActionListener(new ActionListener() {
 			//action listener for the add button (to add from drop down box to the text area)
 			public void actionPerformed(ActionEvent e) {
-
+				ndEquip.remove(comboBoxEquip.getSelectedItem());
+				//redraw the comboBox
+				comboBoxEquip.removeAllItems();
+				for (int x=0; x < allEquip.size(); x++){
+					comboBoxEquip.addItem(allEquip.get(x).getName());
+				}
+				//redraw the textarea items
+				equipAdded.setText("");
+				for (int x=0; x < ndEquip.size(); x++){
+					equipAdded.append((String) ndEquip.get(x).getName() + "\n");
+				}
+				repaint();
 			}
 		});
 		btnRem.setBounds(430, 88, 97, 25);
