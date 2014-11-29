@@ -23,12 +23,12 @@ public class dancingLinks {
         b.columnHead.size++;
     };
 
-    static Object[] firstSolution(byte[][] matrix, Object[] columnNames, int numSecondaryColumn) {
-        return null;
+    static ArrayList<Object[]> firstSolution(byte[][] matrix, Object[] columnNames, int numSecondaryColumn) {
+        return dlx(matrix, columnNames, numSecondaryColumn, true).get(0);
     }
 
-    static ArrayList<Object[]> allSolutions(byte[][] matrix, Object[] columnNames, int numSecondaryColumn) {
-        return null;
+    static ArrayList<ArrayList<Object[]>> allSolutions(byte[][] matrix, Object[] columnNames, int numSecondaryColumn) {
+        return dlx(matrix, columnNames, numSecondaryColumn, false);
     }
 
     /**
@@ -84,7 +84,7 @@ public class dancingLinks {
                 j = j.right;
             }
             allSolutions = search(root, currentSolution, allSolutions, onlyFirst, k + 1);
-            // break if only one solution
+            // break if onlyFirst and one solution exits
             if (onlyFirst && allSolutions.size() >= 1) {
                 return allSolutions;
             }

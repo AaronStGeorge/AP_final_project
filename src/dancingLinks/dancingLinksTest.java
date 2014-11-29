@@ -351,12 +351,12 @@ public class dancingLinksTest {
                 {1, 0, 0, 1, 0, 0, 0},
                 {0, 1, 0, 0, 0, 0, 1},
                 {0, 0, 0, 1, 1, 0, 1},
-                //  {0, 1, 0, 0, 0, 0, 1} // duplicate row to test that all solutions are actually produced
+                {0, 1, 0, 0, 0, 0, 1} // duplicate row to test that all solutions are actually produced
         };
 
         Object[] listHeaders = new String[]{"0", "1", "2", "3", "4", "5", "6"};
 
-        ArrayList<ArrayList<Object[]>> solutions = dancingLinks.dlx(testMatrix, listHeaders, 0, false);
+        ArrayList<ArrayList<Object[]>> solutions = dancingLinks.dlx(testMatrix, listHeaders, 0, true);
 
         for (ArrayList<Object[]> solution : solutions) {
             for (Object[] o : solution) {
