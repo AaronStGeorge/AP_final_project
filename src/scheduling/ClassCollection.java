@@ -59,9 +59,9 @@ public class ClassCollection
 		}
 	}
 
-	private void add(String name, String desc,int s, int e, int r, String[] equip)
+	private void add(String name, String teacher,int s, int e, int r, String[] equip)
 	{
-		classList.add(new Class(name, desc, s,e,r, equip));
+		classList.add(new Class(name, teacher, s,e,r, equip));
 	}
 	/*
 	 * Time is viewed as a normal time number from a digital watch minus the colon. The rotation should be passed in minutes
