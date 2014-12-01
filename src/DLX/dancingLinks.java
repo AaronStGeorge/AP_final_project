@@ -1,4 +1,4 @@
-package dancingLinks;
+package DLX;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,21 +7,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class dancingLinks {
-
-    @FunctionalInterface
-    public interface linkColumnObject {
-        public void link(columnObject a, columnObject b);
-    }
-
-    static final dancingLinks.linkColumnObject HORIZONTAL_LINKER = (a, b) -> {
-        a.right = b;
-        b.left = a;
-    };
-    static final dancingLinks.linkColumnObject VERTICAL_LINKER = (a, b) -> {
-        a.down = b;
-        b.up = a;
-        b.columnHead.size++;
-    };
 
     static ArrayList<Object[]> firstSolution(byte[][] matrix, Object[] columnNames, int numSecondaryColumn) {
         return dlx(matrix, columnNames, numSecondaryColumn, true).get(0);
@@ -114,6 +99,59 @@ public class dancingLinks {
         return c;
     }
 
+    static void coverColumn(columnObject c) {
+        c.left.right = c.right;
+        c.right.left = c.left;
+        columnObject i = c.down;
+        columnObject j;
+        while (!i.equals(c)) {
+            j = i.right;
+            while (!j.equals(i)) {
+                j.down.up = j.up;
+                j.up.down = j.down;
+                j.columnHead.size--;
+                j = j.right;
+            }
+            i = i.down;
+        }
+    }
+
+    static void uncoverColumn(columnObject c) {
+        columnObject i = c.up;
+        columnObject j;
+        while (!i.equals(c)) {
+            j = i.left;
+            while (!j.equals(i)) {
+                if (j.columnHead == null) {
+                    System.out.println(c);
+                    System.out.println(j);
+                }
+                j.columnHead.size++;
+                j.down.up = j;
+                j.up.down = j;
+                j = j.left;
+            }
+            i = i.up;
+        }
+        c.left.right = c;
+        c.right.left = c;
+    }
+
+    @FunctionalInterface
+    public interface linkColumnObject {
+        public void link(columnObject a, columnObject b);
+    }
+
+    static final dancingLinks.linkColumnObject HORIZONTAL_LINKER = (a, b) -> {
+        a.right = b;
+        b.left = a;
+    };
+    static final dancingLinks.linkColumnObject VERTICAL_LINKER = (a, b) -> {
+        a.down = b;
+        b.up = a;
+        b.columnHead.size++;
+    };
+
     static listHeader createCircularlyLinkedLists(byte[][] matrix, Object[] columnNames) {
 
         for (byte[] row : matrix) {
@@ -184,43 +222,6 @@ public class dancingLinks {
         return root;
     }
 
-    static void coverColumn(columnObject c) {
-        c.left.right = c.right;
-        c.right.left = c.left;
-        columnObject i = c.down;
-        columnObject j;
-        while (!i.equals(c)) {
-            j = i.right;
-            while (!j.equals(i)) {
-                j.down.up = j.up;
-                j.up.down = j.down;
-                j.columnHead.size--;
-                j = j.right;
-            }
-            i = i.down;
-        }
-    }
-
-    static void uncoverColumn(columnObject c) {
-        columnObject i = c.up;
-        columnObject j;
-        while (!i.equals(c)) {
-            j = i.left;
-            while (!j.equals(i)) {
-                if (j.columnHead == null) {
-                    System.out.println(c);
-                    System.out.println(j);
-                }
-                j.columnHead.size++;
-                j.down.up = j;
-                j.up.down = j;
-                j = j.left;
-            }
-            i = i.up;
-        }
-        c.left.right = c;
-        c.right.left = c;
-    }
 
     /**
      * links columnObjects in a circle, horizontally or vertically based on orientation flag

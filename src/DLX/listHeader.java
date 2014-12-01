@@ -1,4 +1,4 @@
-package dancingLinks;
+package DLX;
 
 public class listHeader extends columnObject {
     Object data;

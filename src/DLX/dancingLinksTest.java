@@ -1,4 +1,4 @@
-package dancingLinks;
+package DLX;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -343,6 +343,7 @@ public class dancingLinksTest {
 
     @Test
     public void testDlx() throws Exception {
+        // This test sorta sucks. I'm not sure how to fix it at the moment.
 
         byte[][] testMatrix = new byte[][]{
                 {0, 0, 1, 0, 1, 1, 0},
@@ -356,13 +357,17 @@ public class dancingLinksTest {
 
         Object[] listHeaders = new String[]{"0", "1", "2", "3", "4", "5", "6"};
 
-        ArrayList<ArrayList<Object[]>> solutions = dancingLinks.dlx(testMatrix, listHeaders, 0, true);
+        ArrayList<Object[]> sol1 = dancingLinks.firstSolution(testMatrix, listHeaders, 0);
 
-        for (ArrayList<Object[]> solution : solutions) {
-            for (Object[] o : solution) {
-                System.out.println(Arrays.deepToString(o));
-            }
+        ArrayList<ArrayList<Object[]>> allSol = dancingLinks.allSolutions(testMatrix, listHeaders, 0);
+
+        for (ArrayList<Object[]> i : allSol) {
+            System.out.println("sol ========");
+
         }
+
+        Assert.assertTrue(allSol.size() == 2);
+        Assert.assertTrue(sol1.size() == 3);
 
     }
 

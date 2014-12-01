@@ -1,4 +1,4 @@
-package dancingLinks;
+package DLX;
 
 public class columnObject {
     public columnObject up;
