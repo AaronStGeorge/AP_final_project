@@ -235,7 +235,8 @@ public class GUI extends JFrame{
 		btnSchedule.addActionListener(new ActionListener() {
 			//pass class list onto the scheduling section of the program
 			public void actionPerformed(ActionEvent arg0) {
-				//Schedule s = new Schedule(neededClasses, neededClasses.getEquipment());
+				//Class[] needClassArray = neededClasses.toArray(new Class[neededClasses.size()]);
+				//Schedule s = new Schedule(needClassArray, needClassArray.getEquipment());
 			}
 		});
 		btnSchedule.setBounds(12, 376, 200, 61);
@@ -423,7 +424,8 @@ public class GUI extends JFrame{
 				System.out.println("End: " + textE.getText());
 				System.out.println("Rotations: " + textR.getText());
 				System.out.println("");
-				//c.addClass(textClass.getText(), classDesc.getText(),  textS.getText(), textE.getText(), textR.getText() , neededEquipment());
+				//Class[] needEquipArray = neededEquipment.toArray(new Class[neededEquipment.size()]);
+				//c.addClass(textClass.getText(), classDesc.getText(),  textS.getText(), textE.getText(), textR.getText() , needEquipArray());
 			}
 		});
 		btnSched.setBounds(22, 400, 195, 34);
