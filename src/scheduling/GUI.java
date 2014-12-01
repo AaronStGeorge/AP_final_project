@@ -1,3 +1,4 @@
+package scheduling;
 import java.awt.BorderLayout;
 import java.awt.Event;
 import java.awt.EventQueue;
@@ -22,13 +23,12 @@ public class GUI extends JFrame{
 	private JPanel clSched;
 	private JPanel aEquip;
 	private JPanel dSched;
-	static int day;
+	static String day;
 	//testing vars
-	static ArrayList<Class> cNames = new ArrayList();
-	static ArrayList<Class> cSched = new ArrayList();
-	static ArrayList<Equip> allEquip = new ArrayList();
-	static ArrayList<Equip> ndEquip = new ArrayList();
-	
+	static ArrayList<String> cNames = new ArrayList();
+	static ArrayList<String> cSched = new ArrayList();
+	static ArrayList<String> eqNames = new ArrayList();
+	static ArrayList<String> ndEquip = new ArrayList();
 
 	//start the GUI
 	public static void main(String[] args) {
@@ -42,16 +42,10 @@ public class GUI extends JFrame{
 				}
 			}
 		});
-		ClassCollection clCol = new ClassCollection();
-		String[] clNames = clCol.getClasses();
-		for (int x=0; x < clNames.length(); x++){
-			cNames.add(clNames[x]);
-		}
-		
-		EquipmentCollection eqCol = new EquipmentCollection();
-		String[] eqNames = eqCol.getEquipmentList();
-		for (int x=0; x < eqNames.length(); x++){
-			allEquip.add(eqNames[x]);
+		//testing
+		for (int x=0; x < 10; x++){
+			cNames.add("Class " + x);
+			eqNames.add("Equip " + x);
 		}
 	}
 
@@ -79,7 +73,7 @@ public class GUI extends JFrame{
 		btnMonday.addActionListener(new ActionListener() {
 			//action listener for Mon
 			public void actionPerformed(ActionEvent e) {
-				day = 0;
+				day = "monday";
 				main.setVisible(false);
 				daySched();
 			}
@@ -91,7 +85,7 @@ public class GUI extends JFrame{
 		btnTuesday.addActionListener(new ActionListener() {
 			//action listener for Tues
 			public void actionPerformed(ActionEvent e) {
-				day = 1;
+				day = "tuesday";
 				main.setVisible(false);
 				daySched();
 			}
@@ -103,7 +97,7 @@ public class GUI extends JFrame{
 		btnWednesday.addActionListener(new ActionListener() {
 			//action listener for Wed
 			public void actionPerformed(ActionEvent e) {
-				day = 2;
+				day = "wednesday";
 				main.setVisible(false);
 				daySched();
 			}
@@ -115,7 +109,7 @@ public class GUI extends JFrame{
 		btnThursday.addActionListener(new ActionListener() {
 			//action listener for Thurs
 			public void actionPerformed(ActionEvent e) {
-				day = 3;
+				day = "thursday";
 				main.setVisible(false);
 				daySched();
 			}
@@ -127,7 +121,7 @@ public class GUI extends JFrame{
 		btnFriday.addActionListener(new ActionListener() {
 			//action listener for Fri
 			public void actionPerformed(ActionEvent e) {
-				day = 4;
+				day = "friday";
 				main.setVisible(false);
 				daySched();
 			}
@@ -144,41 +138,62 @@ public class GUI extends JFrame{
 		setContentPane(dSched);
 		dSched.setLayout(null);
 		
+		//create variables
+		//ClassCollection c = new ClassCollection(day);
+		//Class[] allClasses = c.getClasses();
+		//ArrayList<Class> neededClasses = new ArrayList();
+		
 		final JComboBox<String> classBox = new JComboBox<String>();
 		classBox.setBounds(12, 13, 200, 37);
 		dSched.add(classBox);
 		for (int x=0; x < cNames.size(); x++){
-			classBox.addItem(cNames.get(x).getName());
+			classBox.addItem(cNames.get(x).toString());
 		}
+		/*for (int x=0; x < allClasses.length(); x++){
+			classBox.addItem(allClasses[x].getName());
+		}*/
 
 		final JComboBox<String> schedBox = new JComboBox<String>();
 		schedBox.setBounds(363, 13, 200, 37);
 		dSched.add(schedBox);
 		for (int x=0; x < cSched.size(); x++){
-			schedBox.addItem(cSched.get(x).getName());
+			schedBox.addItem(cSched.get(x).toString());
 		}
+		/*for (int x=0; x < neededClasses.size(); x++){
+			schedBox.addItem(neededClasses.get(x).getName());
+		}*/
 
 		final JTextArea txtClasses = new JTextArea();
 		txtClasses.setBounds(12, 63, 200, 302);
 		dSched.add(txtClasses);
 		for (int x=0; x < cNames.size(); x++){
-			txtClasses.append((String) cNames.get(x).getName() + "\n");
+			txtClasses.append((String) cNames.get(x).toString() + "\n");
 		}
+		/*for (int x=0; x < allClasses.length(); x++){
+			txtClasses.append(allClasses[x].getName() + "\n");
+		}*/
 
 		final JTextArea txtSched = new JTextArea();
 		txtSched.setBounds(363, 63, 200, 300);
 		dSched.add(txtSched);
 		for (int x=0; x < cSched.size(); x++){
-			txtSched.append((String) cSched.get(x).getName() + "\n");
+			txtSched.append((String) cSched.get(x).toString() + "\n");
 		}
+		/*for (int x=0; x < neededClasses.size(); x++){
+			txtSched.append(neededClasses.get(x).getName());
+		}*/
 		
 		JButton btnAdd = new JButton("Add -->");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cSched.add(classBox.getSelectedItem());
+				cSched.add(classBox.getSelectedItem().toString());
 				schedBox.addItem(classBox.getSelectedItem().toString());
 				txtSched.append(classBox.getSelectedItem().toString() + "\n");
 				repaint();
+				/*neededClasses.add(classBox.getSelectedItem());
+				schedBox.addItem(classBox.getSelectedItem().getName());
+				txtSched.append(classBox.getSelectedItem().getName() + "\n");
+				repaint();*/
 			}
 		});
 		btnAdd.setBounds(224, 69, 127, 37);
@@ -191,14 +206,26 @@ public class GUI extends JFrame{
 				//redraw the comboBox
 				schedBox.removeAllItems();
 				for (int x=0; x < cSched.size(); x++){
-					schedBox.addItem(cSched.get(x).getName());
+					schedBox.addItem(cSched.get(x).toString());
 				}
 				//redraw the textarea items
 				txtSched.setText("");
 				for (int x=0; x < cSched.size(); x++){
-					txtSched.append((String) cSched.get(x).getName() + "\n");
+					txtSched.append((String) cSched.get(x).toString() + "\n");
 				}
 				repaint();
+				/*neededClasses.remove(schedBox.getSelectedIndex());
+				//redraw the comboBox
+				schedBox.removeAllItems();
+				for (int x=0; x < neededClasses.size(); x++){
+					schedBox.addItem(neededClasses.get(x).getName());
+				}
+				//redraw the textarea items
+				txtSched.setText("");
+				for (int x=0; x < neededClasses.size(); x++){
+					txtSched.append((String) neededClasses.get(x).getName() + "\n");
+				}
+				repaint();*/
 			}
 		});
 		btnRemove.setBounds(224, 119, 127, 37);
@@ -208,7 +235,7 @@ public class GUI extends JFrame{
 		btnSchedule.addActionListener(new ActionListener() {
 			//pass class list onto the scheduling section of the program
 			public void actionPerformed(ActionEvent arg0) {
-
+				//Schedule s = new Schedule(neededClasses, neededClasses.getEquipment());
 			}
 		});
 		btnSchedule.setBounds(12, 376, 200, 61);
@@ -228,7 +255,7 @@ public class GUI extends JFrame{
 		JButton btnDeleteClass = new JButton("Delete Class");
 		btnDeleteClass.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				//need a delete class method
 			}
 		});
 		btnDeleteClass.setBounds(224, 328, 127, 37);
@@ -252,8 +279,14 @@ public class GUI extends JFrame{
 		clSched.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(clSched);
 		clSched.setLayout(null);
+		
+		//create variables
+		//Class[] allClasses = c.getClasses();
+		//EquipmentCollection eq = new EquipmentCollection();
+		//Class[] allEquipment = eq.getEquipmentList();
+		//ArrayList<Class> neededEquipment = new ArrayList();
 
-		JTextField textClass = new JTextField();
+		final JTextField textClass = new JTextField();
 		textClass.setBounds(100, 15, 160, 30);
 		clSched.add(textClass);
 		textClass.setColumns(10);
@@ -262,7 +295,7 @@ public class GUI extends JFrame{
 		lblClassName.setBounds(12, 15, 84, 30);
 		clSched.add(lblClassName);
 
-		JTextArea classDesc = new JTextArea();
+		final JTextArea classDesc = new JTextArea();
 		classDesc.setBounds(12, 75, 248, 125);
 		clSched.add(classDesc);
 
@@ -270,7 +303,7 @@ public class GUI extends JFrame{
 		lblClassDescription.setBounds(12, 50, 195, 16);
 		clSched.add(lblClassDescription);
 
-		JTextField textS = new JTextField();
+		final JTextField textS = new JTextField();
 		textS.setBounds(75, 215, 160, 30);
 		clSched.add(textS);
 		textS.setColumns(10);
@@ -279,7 +312,7 @@ public class GUI extends JFrame{
 		lblS.setBounds(12, 215, 84, 30);
 		clSched.add(lblS);
 		
-		JTextField textE = new JTextField();
+		final JTextField textE = new JTextField();
 		textE.setBounds(75, 250, 160, 30);
 		clSched.add(textE);
 		textE.setColumns(10);
@@ -288,7 +321,7 @@ public class GUI extends JFrame{
 		lblE.setBounds(12, 250, 84, 30);
 		clSched.add(lblE);
 		
-		JTextField textR = new JTextField();
+		final JTextField textR = new JTextField();
 		textR.setBounds(75, 285, 160, 30);
 		clSched.add(textR);
 		textR.setColumns(10);
@@ -297,49 +330,76 @@ public class GUI extends JFrame{
 		lblR.setBounds(12, 285, 84, 30);
 		clSched.add(lblR);
 		
-		JComboBox comboBoxEquip = new JComboBox();
-		comboBoxEquip.setBounds(324, 57, 200, 22);
+		final JComboBox<String> comboBoxEquip = new JComboBox<String>();
+		comboBoxEquip.setBounds(324, 30, 200, 22);
 		clSched.add(comboBoxEquip);
+		for (int x=0; x < eqNames.size(); x++){
+			comboBoxEquip.addItem(eqNames.get(x).toString());
+		}
+		/*for (int x=0; x < allEquipment.length(); x++){
+			comboBoxEquip.addItem(allEquipment[x].getName());
+		}*/
+		
+		final JComboBox<String> cbNEquip = new JComboBox<String>();
+		cbNEquip.setBounds(324, 90, 200, 22);
+		clSched.add(cbNEquip);
 
-		JTextArea equipAdded = new JTextArea();
-		equipAdded.setBounds(305, 120, 230, 200);
+		final JTextArea equipAdded = new JTextArea();
+		equipAdded.setBounds(305, 125, 230, 200);
 		clSched.add(equipAdded);
 
 		JLabel lblEquipmentNeeded = new JLabel("Equipment needed:");
-		lblEquipmentNeeded.setBounds(324, 31, 200, 16);
+		lblEquipmentNeeded.setBounds(324, 10, 200, 16);
 		clSched.add(lblEquipmentNeeded);
 
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			//action listener for the add button (to add from drop down box to the text area)
 			public void actionPerformed(ActionEvent e) {
-				ndEquip.add(comboBoxEquip.getSelectedItem());
-				equipAdded.append(classBox.getSelectedItem().getName() + "\n");
+				ndEquip.add(comboBoxEquip.getSelectedItem().toString());
+				cbNEquip.addItem(comboBoxEquip.getSelectedItem().toString());
+				equipAdded.append(comboBoxEquip.getSelectedItem().toString() + "\n");
 				repaint();
+				/*neededEquipment.add(comboBoxEquip.getSelectedItem());
+				cbNEquip.addItem(comboBoxEquip.getSelectedItem().getName);
+				equipAdded.append(comboBoxEquip.getSelectedItem().getName + "\n");
+				repaint();*/
 			}
 		});
-		btnAdd.setBounds(310, 88, 97, 25);
+		btnAdd.setBounds(310, 60, 97, 25);
 		clSched.add(btnAdd);
 		
 		JButton btnRem = new JButton("Remove");
 		btnRem.addActionListener(new ActionListener() {
 			//action listener for the add button (to add from drop down box to the text area)
 			public void actionPerformed(ActionEvent e) {
-				ndEquip.remove(comboBoxEquip.getSelectedItem());
+				ndEquip.remove(cbNEquip.getSelectedItem());
 				//redraw the comboBox
-				comboBoxEquip.removeAllItems();
-				for (int x=0; x < allEquip.size(); x++){
-					comboBoxEquip.addItem(allEquip.get(x).getName());
+				cbNEquip.removeAllItems();
+				for (int x=0; x < ndEquip.size(); x++){
+					cbNEquip.addItem(ndEquip.get(x).toString());
 				}
 				//redraw the textarea items
 				equipAdded.setText("");
 				for (int x=0; x < ndEquip.size(); x++){
-					equipAdded.append((String) ndEquip.get(x).getName() + "\n");
+					equipAdded.append((String) ndEquip.get(x).toString() + "\n");
 				}
 				repaint();
+				/*neededEquipment.remove(cbNEquip.getSelectedItem());
+				//redraw the comboBox
+				cbNEquip.removeAllItems();
+				for (int x=0; x < neededEquipment.size(); x++){
+					cbNEquip.addItem(neededEquipment.get(x).getName());
+				}
+				//redraw the textarea items
+				equipAdded.setText("");
+				for (int x=0; x < neededEquipment.size(); x++){
+					equipAdded.append((String) neededEquipment.get(x).getName() + "\n");
+				}
+				repaint();*/
 			}
 		});
-		btnRem.setBounds(430, 88, 97, 25);
+		btnRem.setBounds(430, 60, 97, 25);
 		clSched.add(btnRem);
 		
 		JButton btnMenu = new JButton("Back");
@@ -353,11 +413,17 @@ public class GUI extends JFrame{
 		btnMenu.setBounds(22, 350, 195, 34);
 		clSched.add(btnMenu);
 		
-		JButton btnSched = new JButton("Schedule!");
+		JButton btnSched = new JButton("Create!");
 		btnSched.addActionListener(new ActionListener() {
 			//action listener for the schedule button
 			public void actionPerformed(ActionEvent e) {
-
+				System.out.println("Class Name: " + textClass.getText());
+				System.out.println("Class Description: " + classDesc.getText());
+				System.out.println("Start: " + textS.getText());
+				System.out.println("End: " + textE.getText());
+				System.out.println("Rotations: " + textR.getText());
+				System.out.println("");
+				//c.addClass(textClass.getText(), classDesc.getText(),  textS.getText(), textE.getText(), textR.getText() , neededEquipment());
 			}
 		});
 		btnSched.setBounds(22, 400, 195, 34);
@@ -379,7 +445,7 @@ public class GUI extends JFrame{
 		btnDelEquip.addActionListener(new ActionListener() {
 			//action listener for delete equip button
 			public void actionPerformed(ActionEvent arg0) {
-				
+				//Need a way to delete a piece of equip
 			}
 		});
 		btnDelEquip.setBounds(330, 400, 195, 34); 
@@ -393,12 +459,15 @@ public class GUI extends JFrame{
 		aEquip.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(aEquip);
 		aEquip.setLayout(null);
+		
+		//create variables
+		//EquipmentCollection eq = new EquipmentCollection();
 
 		JLabel lblNewEquipmentName = new JLabel("New Equipment Name:");
 		lblNewEquipmentName.setBounds(25, 22, 169, 14);
 		aEquip.add(lblNewEquipmentName);
 
-		JTextField equipName = new JTextField();
+		final JTextField equipName = new JTextField();
 		equipName.setBounds(25, 47, 169, 20);
 		aEquip.add(equipName);
 		equipName.setColumns(10);
@@ -407,7 +476,7 @@ public class GUI extends JFrame{
 		lblShortDescription.setBounds(25, 78, 169, 14);
 		aEquip.add(lblShortDescription);
 
-		JTextArea equipDesc = new JTextArea();
+		final JTextArea equipDesc = new JTextArea();
 		equipDesc.setBounds(25, 103, 380, 88);
 		aEquip.add(equipDesc);
 
@@ -415,7 +484,9 @@ public class GUI extends JFrame{
 		btnSubmit.addActionListener(new ActionListener() {
 			//action listener for submit button
 			public void actionPerformed(ActionEvent e) {
-
+				System.out.println("Equip Name: " + equipName.getText());
+				System.out.println("Equip Description: " + equipDesc.getText());
+				//eq.addEquipment(equipName.getText(), equipDesc.getText());
 			}
 		});
 		btnSubmit.setBounds(25, 215, 150, 40);
