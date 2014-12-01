@@ -220,7 +220,7 @@ public class GUI extends JFrame{
 			//pass class list onto the scheduling section of the program
 			public void actionPerformed(ActionEvent arg0) {
 				Class[] needClassArray = neededClasses.toArray(new Class[neededClasses.size()]);
-				Schedule s = new Schedule(eq.getEquipmentList(), needClassArray);
+				Schedule s = new Schedule(eq.getEquipmentList(), needClassArray); //pass in the entire equip list, the class checks it anyways
 			}
 		});
 		btnSchedule.setBounds(12, 376, 200, 61);
