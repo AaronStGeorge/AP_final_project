@@ -291,7 +291,7 @@ public class GUI extends JFrame{
 		eq.addEquipment("tramp", "bouncy bouncy");*/
 		
 		final String[] allEquipment = eq.getEquipmentList();
-		final ArrayList<Class> neededEquipment = new ArrayList<Class>();
+		final ArrayList<String> neededEquipment = new ArrayList<String>();
 		for (int x=0; x<allEquipment.length;x++){
 			System.out.println("Equipment Piece " + x + ": " + allEquipment[x]);
 		}//make sure all the equipment is there
@@ -364,7 +364,7 @@ public class GUI extends JFrame{
 		btnAdd.addActionListener(new ActionListener() {
 			//action listener for the add button (to add from drop down box to the text area)
 			public void actionPerformed(ActionEvent e) {
-				neededEquipment.add((Class) comboBoxEquip.getSelectedItem());
+				neededEquipment.add((String) comboBoxEquip.getSelectedItem().toString());
 				cbNEquip.addItem(comboBoxEquip.getSelectedItem().toString());
 				equipAdded.append(comboBoxEquip.getSelectedItem().toString() + "\n");
 				repaint();
@@ -377,16 +377,16 @@ public class GUI extends JFrame{
 		btnRem.addActionListener(new ActionListener() {
 			//action listener for the add button (to add from drop down box to the text area)
 			public void actionPerformed(ActionEvent e) {
-				neededEquipment.remove(cbNEquip.getSelectedItem());
+				neededEquipment.remove(cbNEquip.getSelectedIndex());
 				//redraw the comboBox
 				cbNEquip.removeAllItems();
 				for (int x=0; x < neededEquipment.size(); x++){
-					cbNEquip.addItem(neededEquipment.get(x).getName());
+					cbNEquip.addItem(neededEquipment.get(x).toString());
 				}
 				//redraw the textarea items
 				equipAdded.setText("");
 				for (int x=0; x < neededEquipment.size(); x++){
-					equipAdded.append((String) neededEquipment.get(x).getName() + "\n");
+					equipAdded.append((String) neededEquipment.get(x).toString() + "\n");
 				}
 				repaint();
 			}
@@ -411,11 +411,11 @@ public class GUI extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				String[] needEquipArray = new String[neededEquipment.size()];
 				for (int x = 0; x < needEquipArray.length; x++){
-					needEquipArray[x] = neededEquipment.get(x).getName();
+					needEquipArray[x] = neededEquipment.get(x).toString();
 				}
-				int st = (int) Double.parseDouble(textS.getText());
-				int en = (int) Double.parseDouble(textE.getText());
-				int ro = (int) Double.parseDouble(textR.getText());
+				int st = Integer.parseInt(textS.getText());
+				int en = Integer.parseInt(textE.getText());
+				int ro = Integer.parseInt(textR.getText());
 				c.addClass(textClass.getText(), classDesc.getText(),  st, en, ro , needEquipArray);
 				c.save();
 			}
@@ -479,6 +479,7 @@ public class GUI extends JFrame{
 			//action listener for submit button
 			public void actionPerformed(ActionEvent e) {
 				eq.addEquipment(equipName.getText(), equipDesc.getText());
+				eq.save();
 			}
 		});
 		btnSubmit.setBounds(25, 215, 150, 40);
