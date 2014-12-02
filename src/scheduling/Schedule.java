@@ -2,6 +2,8 @@ package scheduling;
 
 import java.util.Arrays;
 
+import javax.swing.JOptionPane;
+
 public class Schedule {
     /*
      * This creates the4-dimensional array but is dynamic
@@ -20,9 +22,25 @@ public class Schedule {
      * The constructor needs the list of classes that need to be scheduled and also the equipment list
      * from EquipmentCollection.
      */
-    public Schedule(String[] equipList, Class[] classes) {
-        this.equipList = equipList;
+    
+    public Schedule(String[] equipList, Class[] classes)
+    {
+    	this.equipList = equipList;
         this.classes = classes;
+    	int choice =Integer.parseInt(JOptionPane.showInputDialog("Type 1 for Dancing links or 2 for Recursion"));
+    	if(choice == 1)
+    	{
+    		
+    	}
+    	else if(choice == 2)
+    	{
+    		InputAdapter inputer = new RecursiveInput();
+    		inputer.changeInput(equipList, classes);
+    	}
+    }
+    /*
+    public Schedule(String[] equipList, Class[] classes) {
+        
         sortClassesEnd();
         int end = classes[classes.length - 1].getEnd();
         sortClassesStart();
@@ -39,7 +57,7 @@ public class Schedule {
         //printSchedule();
     }
 
-
+    
     private void addClasses() {
         initializeEquipLists();
         int startTime = classes[0].getStart();
@@ -156,7 +174,7 @@ public class Schedule {
         for (int i = 0; i < c.length; i++) {
             System.out.println(c[i].getName());
         }
-    }
+    }*/
 	/*
 	 * Simple bubblesort to sort the classes by their start date, earliest first.
 	 */
