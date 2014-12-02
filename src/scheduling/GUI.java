@@ -165,6 +165,7 @@ public class GUI extends JFrame{
 		
 		final Class[] allClasses = c.getClasses();
 		final ArrayList<Class> neededClasses = new ArrayList<Class>();
+		final String[] allEquip = eq.getEquipmentList();
 		
 		final JComboBox<String> classBox = new JComboBox<String>();
 		classBox.setBounds(12, 13, 200, 37);
@@ -234,7 +235,7 @@ public class GUI extends JFrame{
 			//pass class list onto the scheduling section of the program
 			public void actionPerformed(ActionEvent arg0) {
 				Class[] needClassArray = neededClasses.toArray(new Class[neededClasses.size()]);
-				Schedule s = new Schedule(eq.getEquipmentList(), needClassArray); //pass in the entire equip list, the class checks it anyways
+				Schedule s = new Schedule(allEquip, needClassArray); //pass in the entire equip list, the class checks it anyways
 			}
 		});
 		btnSchedule.setBounds(12, 376, 200, 61);
