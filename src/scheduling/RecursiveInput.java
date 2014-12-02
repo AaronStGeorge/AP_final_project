@@ -5,25 +5,27 @@ public class RecursiveInput implements InputAdapter
 	int[][][] possibilities;
 	String[] equipList;
 	Class[] classes;
+	int time, equipListSize;
 
 	@Override
 	public void changeInput(String[] equipList, Class[] classes) {
 		this.classes = classes;
 		this.equipList = equipList;
+		equipListSize = equipList.length;
 		sortClassesEnd();
         int end = classes[classes.length - 1].getEnd();
         sortClassesStart();
         int start = classes[0].getStart();
-        int time = Time.numOfRotationsNeeded(start, end, 15);
+        time = Time.numOfRotationsNeeded(start, end, 15);
         possibilities = new int[time][classes.length][];
         addClasses();
-        printPossibilities();
+        //printPossibilities();
 
 	}
 
 	@Override
 	public int[][] schedule() {
-		// TODO Auto-generated method stub
+		RecursiveSolution solver = new RecursiveSolution(possibilities, classes, time, equipListSize);
 		return null;
 	}
 	

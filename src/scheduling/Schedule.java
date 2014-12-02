@@ -36,6 +36,7 @@ public class Schedule {
     	{
     		InputAdapter inputer = new RecursiveInput();
     		inputer.changeInput(equipList, classes);
+    		inputer.schedule();
     	}
     }
     /*
