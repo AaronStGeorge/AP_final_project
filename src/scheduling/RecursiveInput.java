@@ -19,8 +19,6 @@ public class RecursiveInput implements InputAdapter
         time = Time.numOfRotationsNeeded(start, end, 15);
         possibilities = new int[time][classes.length][];
         addClasses();
-        //printPossibilities();
-
 	}
 
 	@Override
@@ -95,7 +93,7 @@ public class RecursiveInput implements InputAdapter
         }
         return indexes;
     }
-    
+    /*
     private void printPossibilities() {
         System.out.println("===================== Possibilities");
         int maxSize = 0;
@@ -126,6 +124,6 @@ public class RecursiveInput implements InputAdapter
             }
             System.out.println("]");
         }
-    }
+    }*/
 
 }

@@ -27,5 +27,23 @@ public class Time
 		return total/rotation;
 	}
 	
+	public static int addFifteen(int time)
+	{
+		/*
+		 * first, the time is changed reflect its base 100 equivalent.
+		 * For example, 1015 is turned to 1025 because 15 is 1/4 of 60.
+		 */
+		int t = (time/100)*100+(time%100*5)/3;
+		/*
+		 * this adds 15 minutes because 15 is 1/4 of 60 as 25 is 1/4 of 100
+		 */
+		t+=25;
+		/*
+		 * Change time back to base 60
+		 */
+		t=(t/100)*100+((t%100)*3)/5;
+		return t;
+	}
+	
 	
 }
