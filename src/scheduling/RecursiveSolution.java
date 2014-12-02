@@ -23,7 +23,10 @@ public class RecursiveSolution {
         scheduleClasses();
         printSchedule();
     }
-    
+    public int[][] getSchedule()
+    {
+    	return schedule;
+    }
     private boolean scheduleClasses() {
         if (scheduleClasses(0)) {
             System.out.println("Scheduling was a success!");

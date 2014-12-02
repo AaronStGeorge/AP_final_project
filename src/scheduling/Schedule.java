@@ -12,11 +12,11 @@ public class Schedule {
 	 *HashMap<Integer, List<String>> equipment;
 	 *HashMap<Integer,HashMap<Integer, List<String>>> times;
 	*/
-    int[][][] possibilities;
-    int[][] schedule;
+    //int[][][] possibilities;
+    //int[][] schedule;
     String[] equipList;
     Class[] classes;
-    private int maxLength;
+    //private int maxLength;
 
     /*
      * The constructor needs the list of classes that need to be scheduled and also the equipment list
@@ -30,13 +30,14 @@ public class Schedule {
     	int choice =Integer.parseInt(JOptionPane.showInputDialog("Type 1 for Dancing links or 2 for Recursion"));
     	if(choice == 1)
     	{
-    		
+    		//TODO add dancing links implementation
     	}
     	else if(choice == 2)
     	{
     		InputAdapter inputer = new RecursiveInput();
     		inputer.changeInput(equipList, classes);
-    		inputer.schedule();
+    		int[][] schedule =inputer.schedule();
+    		Outputter output = new Outputter(schedule, equipList, classes );
     	}
     }
     /*
