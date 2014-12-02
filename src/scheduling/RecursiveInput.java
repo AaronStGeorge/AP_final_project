@@ -26,7 +26,7 @@ public class RecursiveInput implements InputAdapter
 	@Override
 	public int[][] schedule() {
 		RecursiveSolution solver = new RecursiveSolution(possibilities, classes, time, equipListSize);
-		return null;
+		return solver.getSchedule();
 	}
 	
 	private void sortClassesStart() {
@@ -86,9 +86,10 @@ public class RecursiveInput implements InputAdapter
     private int[] findEquipIndexes(Class c) {
         String[] equipment = c.getEquipment();
         int[] indexes = new int[equipment.length];
-        for (int i = 0; i < equipment.length; i++) {
+        for (int i = 0; i < equipment.length; i++) 
+        {
             int j = 0;
-            while (equipment[i] != equipList[j])
+            while (!equipment[i].equals(equipList[j]))
                 j++;
             indexes[i] = j;
         }
