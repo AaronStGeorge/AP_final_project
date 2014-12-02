@@ -41,7 +41,7 @@ public class GUI extends JFrame{
 				}
 			}
 		});
-		//Testing hardcoding some classes and their equipment for Monday
+		//Testing hard-coding some classes and their equipment for Monday
 		EquipmentCollection eq = new EquipmentCollection();
 		ClassCollection c = new ClassCollection("Monday");
 		String[] e  ={"bars","floor","rings","tramp"};
@@ -52,16 +52,16 @@ public class GUI extends JFrame{
 		c.addClass("Losing",  "Dean",  915, 1015, 15 ,e);
 		c.addClass("Plastic", "Crowley", 1000, 1100, 30 ,e2);
 		c.save();
-		eq.addEquipment("bars", "climbing bars");
-		eq.addEquipment("floor", "a clean floor");
-		eq.addEquipment("rings", "one to rule them all");
-		eq.addEquipment("tramp", "bouncy bouncy");
+		eq.addEquipment("bars", "Climbing");
+		eq.addEquipment("floor", "CleanFloor");
+		eq.addEquipment("rings", "1ToRuleThemAll");
+		eq.addEquipment("tramp", "BouncyBouncy");
 		eq.save();
 	}
 
 	//create the main JFrame
 	public GUI(){
-		setTitle("Schedule Program");
+		setTitle("Scheduling Assistant");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 595, 500);
 		mainFrame();
@@ -167,6 +167,7 @@ public class GUI extends JFrame{
 		
 		final Class[] allClasses = c.getClasses();
 		final ArrayList<Class> neededClasses = new ArrayList<Class>();
+		final String[] allEquip = eq.getEquipmentList();
 		
 		final JComboBox<String> classBox = new JComboBox<String>();
 		classBox.setBounds(12, 13, 200, 37);
@@ -234,7 +235,7 @@ public class GUI extends JFrame{
 			//pass class list onto the scheduling section of the program
 			public void actionPerformed(ActionEvent arg0) {
 				Class[] needClassArray = neededClasses.toArray(new Class[neededClasses.size()]);
-				Schedule s = new Schedule(eq.getEquipmentList(), needClassArray); //pass in the entire equip list, the class checks it anyways
+				Schedule s = new Schedule(allEquip, needClassArray); //pass in the entire equip list, the class checks it anyways
 			}
 		});
 		btnSchedule.setBounds(12, 376, 200, 61);

@@ -17,14 +17,12 @@ public class test
 		c.addClass("mm",  "asdf",   915, 1015, 30 ,e1);
 		c.addClass("im",  "asdfx",  915, 1015, 15 ,e);
 		c.addClass("imx", "asdfx", 1000, 1100, 30 ,e2);
-		//c.save();
 
 		EquipmentCollection eq = new EquipmentCollection();
 		eq.addEquipment("bars", "asdf");
 		eq.addEquipment("floor", "asdf");
 		eq.addEquipment("rings", "asdf");
 		eq.addEquipment("tramp", "asdf");
-		//eq.save();
 
 		int test = 2;
 
