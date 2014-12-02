@@ -11,6 +11,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.JTextComponent;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -42,7 +43,7 @@ public class GUI extends JFrame{
 			}
 		});
 		//Testing hard-coding some classes and their equipment for Monday, should return the same result as the test class
-		/*EquipmentCollection eq = new EquipmentCollection();
+		EquipmentCollection eq = new EquipmentCollection();
 		ClassCollection c = new ClassCollection("Monday");
 		String[] e  ={"bars","floor","rings","tramp"};
 		String[] e1 ={"floor","rings"};
@@ -56,7 +57,7 @@ public class GUI extends JFrame{
 		eq.addEquipment("floor", "CleanFloor");
 		eq.addEquipment("rings", "1ToRuleThemAll");
 		eq.addEquipment("tramp", "BouncyBouncy");
-		eq.save();*/
+		eq.save();
 	}
 
 	//create the main JFrame
@@ -153,7 +154,7 @@ public class GUI extends JFrame{
 		final EquipmentCollection eq = new EquipmentCollection();
 		
 		//testing	
-		String[] e  ={"bars","floor","rings","tramp"};
+		/*String[] e  ={"bars","floor","rings","tramp"};
 		String[] e1 ={"floor","rings"};
 		String[] e2 ={"bars","tramp"};
 		c.addClass("ClassA", "Bobby",  900, 1000, 15 ,e);
@@ -163,11 +164,10 @@ public class GUI extends JFrame{
 		eq.addEquipment("bars", "climbing bars");
 		eq.addEquipment("floor", "a clean floor");
 		eq.addEquipment("rings", "one to rule them all");
-		eq.addEquipment("tramp", "bouncy bouncy");
+		eq.addEquipment("tramp", "bouncy bouncy");*/
 		
 		final Class[] allClasses = c.getClasses();
 		final ArrayList<Class> neededClasses = new ArrayList<Class>();
-		final String[] allEquip = eq.getEquipmentList();
 		
 		final JComboBox<String> classBox = new JComboBox<String>();
 		classBox.setBounds(12, 13, 200, 37);
@@ -186,6 +186,7 @@ public class GUI extends JFrame{
 		final JTextArea txtClasses = new JTextArea();
 		txtClasses.setBounds(12, 63, 200, 302);
 		dSched.add(txtClasses);
+		txtClasses.setEditable(false);
 		for (int x=0; x < allClasses.length; x++){
 			txtClasses.append(allClasses[x].getName() + "\n");
 		}
@@ -193,6 +194,7 @@ public class GUI extends JFrame{
 		final JTextArea txtSched = new JTextArea();
 		txtSched.setBounds(363, 63, 200, 300);
 		dSched.add(txtSched);
+		txtSched.setEditable(false);
 		for (int x=0; x < neededClasses.size(); x++){
 			txtSched.append(neededClasses.get(x).getName());
 		}
@@ -235,7 +237,7 @@ public class GUI extends JFrame{
 			//pass class list onto the scheduling section of the program
 			public void actionPerformed(ActionEvent arg0) {
 				Class[] needClassArray = neededClasses.toArray(new Class[neededClasses.size()]);
-				Schedule s = new Schedule(allEquip, needClassArray); //pass in the entire equip list, the class checks it anyways
+				Schedule s = new Schedule(eq.getEquipmentList(), needClassArray); //pass in the entire equip list, the class checks it anyways
 			}
 		});
 		btnSchedule.setBounds(12, 376, 200, 61);
@@ -283,22 +285,21 @@ public class GUI extends JFrame{
 		//create variables
 		final EquipmentCollection eq = new EquipmentCollection();
 		final ClassCollection c = new ClassCollection(day);
-		//Class[] allClasses = c.getClasses();
 		
 		//testing
-		eq.addEquipment("bars", "climbing bars");
+		/*eq.addEquipment("bars", "climbing bars");
 		eq.addEquipment("floor", "a clean floor");
 		eq.addEquipment("rings", "one to rule them all");
-		eq.addEquipment("tramp", "bouncy bouncy");
+		eq.addEquipment("tramp", "bouncy bouncy");*/
 		
-		String[] allEquipment = eq.getEquipmentList();
+		final String[] allEquipment = eq.getEquipmentList();
 		final ArrayList<Class> neededEquipment = new ArrayList<Class>();
 		for (int x=0; x<allEquipment.length;x++){
 			System.out.println("Equipment Piece " + x + ": " + allEquipment[x]);
-		}
+		}//make sure all the equipment is there
 
 		final JTextField textClass = new JTextField();
-		textClass.setBounds(100, 15, 160, 45);
+		textClass.setBounds(100, 15, 160, 40);
 		clSched.add(textClass);
 		textClass.setColumns(10);
 
@@ -355,6 +356,7 @@ public class GUI extends JFrame{
 		final JTextArea equipAdded = new JTextArea();
 		equipAdded.setBounds(305, 125, 230, 200);
 		clSched.add(equipAdded);
+		equipAdded.setEditable(false);
 
 		JLabel lblEquipmentNeeded = new JLabel("Equipment needed:");
 		lblEquipmentNeeded.setBounds(324, 10, 200, 16);
