@@ -1,5 +1,7 @@
 package scheduling;
 
+import java.util.Arrays;
+
 /**
  * Created by aaron on 12/1/14.
  */
@@ -9,6 +11,28 @@ public class RecursiveSolution {
     int[][] schedule;
     Class[] classes;
 
+    public RecursiveSolution( int[][][] possibilities, Class[] classes, int time, int equipListSize)
+    {
+    	this.possibilities = possibilities;
+    	this.classes = classes;
+    	schedule = new int[time][equipListSize];
+        for(int[] row: schedule)
+        {
+            Arrays.fill(row,-1);
+        }
+        scheduleClasses();
+        printSchedule();
+    }
+    
+    private boolean scheduleClasses() {
+        if (scheduleClasses(0)) {
+            System.out.println("Scheduling was a success!");
+            return true;
+        } else {
+            System.out.println("Scheduling was a failure!");
+            return false;
+        }
+    }
 
     private boolean scheduleClasses(int pos) {
         if (pastEndOfGrid(pos)) return true;
@@ -55,13 +79,13 @@ public class RecursiveSolution {
     }
 
     // returns row and column in possibilities matrix from flat matrix index pos
-    public int[] position(int pos) {
+    private int[] position(int pos) {
         int i = pos / possibilities[0].length;
         int j = pos % possibilities[0].length;
         return new int[]{i, j};
     }
 
-    public boolean pastEndOfGrid(int pos) {
+    private boolean pastEndOfGrid(int pos) {
         try {
             int[] ij = position(pos);
             int i = ij[0];
@@ -75,7 +99,7 @@ public class RecursiveSolution {
 
 
     // checks for duplicates except for -1. You can repeat -1 as much as you want.
-    public static boolean checkForDuplicates(int[] row) {
+    private static boolean checkForDuplicates(int[] row) {
         for (int i = 0; i < row.length; i++) {
             int sum = 0;
             for (int j = 0; j < row.length; j++) {
@@ -91,17 +115,9 @@ public class RecursiveSolution {
     }
 
 
-    public boolean scheduleClasses() {
-        if (scheduleClasses(0)) {
-            System.out.println("Scheduling was a success!");
-            return true;
-        } else {
-            System.out.println("Scheduling was a failure!");
-            return false;
-        }
-    }
+    
 
-    public static boolean gridValid(int[][] grid) {
+    private static boolean gridValid(int[][] grid) {
         for (int i = 0; i < grid.length; i++) {
             if (!checkForDuplicates(grid[i])) {
                 return false;
@@ -117,5 +133,15 @@ public class RecursiveSolution {
             }
         }
         return true;
+    }
+    private void printSchedule() {
+        System.out.println("===================== Schedule");
+        for (int i = 0 ; i < schedule.length; i++){
+            System.out.print("[");
+            for (int j = 0; j < schedule[0].length; j++) {
+                System.out.print(String.format("[%-2s]",schedule[i][j]));
+            }
+            System.out.println("]");
+        }
     }
 }
