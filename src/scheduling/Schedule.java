@@ -1,22 +1,12 @@
 package scheduling;
-
-import java.util.Arrays;
-
 import javax.swing.JOptionPane;
 
 public class Schedule {
-    /*
-     * This creates the4-dimensional array but is dynamic
-     */
-    /*
-	 *HashMap<Integer, List<String>> equipment;
-	 *HashMap<Integer,HashMap<Integer, List<String>>> times;
-	*/
-    //int[][][] possibilities;
-    //int[][] schedule;
+   /*
+    * Since we have two ways to solve the problem, this allows you to choose which stratgey you want
+    */
     String[] equipList;
     Class[] classes;
-    //private int maxLength;
 
     /*
      * The constructor needs the list of classes that need to be scheduled and also the equipment list
@@ -36,8 +26,8 @@ public class Schedule {
     	{
     		InputAdapter inputer = new RecursiveInput();
     		inputer.changeInput(equipList, classes);
-    		int[][] schedule =inputer.schedule();
-    		Outputter output = new Outputter(schedule, equipList, classes );
+    		//no output adapter needed, the solution output is already in the right form
+    		new Outputter(inputer.schedule(), equipList, classes );
     	}
     }
     /*

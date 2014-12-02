@@ -102,7 +102,7 @@ public class RecursiveSolution {
 
 
     // checks for duplicates except for -1. You can repeat -1 as much as you want.
-    private static boolean checkForDuplicates(int[] row) {
+    private boolean checkForDuplicates(int[] row) {
         for (int i = 0; i < row.length; i++) {
             int sum = 0;
             for (int j = 0; j < row.length; j++) {
@@ -120,7 +120,7 @@ public class RecursiveSolution {
 
     
 
-    private static boolean gridValid(int[][] grid) {
+    private boolean gridValid(int[][] grid) {
         for (int i = 0; i < grid.length; i++) {
             if (!checkForDuplicates(grid[i])) {
                 return false;
