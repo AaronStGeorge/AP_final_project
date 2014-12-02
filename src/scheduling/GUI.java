@@ -42,7 +42,7 @@ public class GUI extends JFrame{
 			}
 		});
 		//Testing hard-coding some classes and their equipment for Monday, should return the same result as the test class
-		EquipmentCollection eq = new EquipmentCollection();
+		/*EquipmentCollection eq = new EquipmentCollection();
 		ClassCollection c = new ClassCollection("Monday");
 		String[] e  ={"bars","floor","rings","tramp"};
 		String[] e1 ={"floor","rings"};
@@ -56,7 +56,7 @@ public class GUI extends JFrame{
 		eq.addEquipment("floor", "CleanFloor");
 		eq.addEquipment("rings", "1ToRuleThemAll");
 		eq.addEquipment("tramp", "BouncyBouncy");
-		eq.save();
+		eq.save();*/
 	}
 
 	//create the main JFrame
@@ -153,7 +153,7 @@ public class GUI extends JFrame{
 		final EquipmentCollection eq = new EquipmentCollection();
 		
 		//testing	
-		/*String[] e  ={"bars","floor","rings","tramp"};
+		String[] e  ={"bars","floor","rings","tramp"};
 		String[] e1 ={"floor","rings"};
 		String[] e2 ={"bars","tramp"};
 		c.addClass("ClassA", "Bobby",  900, 1000, 15 ,e);
@@ -163,7 +163,7 @@ public class GUI extends JFrame{
 		eq.addEquipment("bars", "climbing bars");
 		eq.addEquipment("floor", "a clean floor");
 		eq.addEquipment("rings", "one to rule them all");
-		eq.addEquipment("tramp", "bouncy bouncy");*/
+		eq.addEquipment("tramp", "bouncy bouncy");
 		
 		final Class[] allClasses = c.getClasses();
 		final ArrayList<Class> neededClasses = new ArrayList<Class>();
@@ -286,10 +286,10 @@ public class GUI extends JFrame{
 		//Class[] allClasses = c.getClasses();
 		
 		//testing
-		/*eq.addEquipment("bars", "climbing bars");
+		eq.addEquipment("bars", "climbing bars");
 		eq.addEquipment("floor", "a clean floor");
 		eq.addEquipment("rings", "one to rule them all");
-		eq.addEquipment("tramp", "bouncy bouncy");*/
+		eq.addEquipment("tramp", "bouncy bouncy");
 		
 		String[] allEquipment = eq.getEquipmentList();
 		final ArrayList<Class> neededEquipment = new ArrayList<Class>();
