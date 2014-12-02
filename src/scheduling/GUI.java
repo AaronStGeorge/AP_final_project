@@ -41,7 +41,7 @@ public class GUI extends JFrame{
 				}
 			}
 		});
-
+		
 	}
 
 	//create the main JFrame
@@ -135,24 +135,23 @@ public class GUI extends JFrame{
 		
 		//create variables
 		final ClassCollection c = new ClassCollection(day);	
+		final EquipmentCollection eq = new EquipmentCollection();
+		
 		//testing
 		String[] e  ={"bars","floor","rings","tramp"};
 		String[] e1 ={"floor","rings"};
 		String[] e2 ={"bars","tramp"};
-
-		c.addClass("mmv", "asdfu",  900, 1000, 15 ,e);
-		c.addClass("mm",  "asdf",   915, 1015, 30 ,e1);
-		c.addClass("im",  "asdfx",  915, 1015, 15 ,e);
-		c.addClass("imx", "asdfx", 1000, 1100, 30 ,e2);
-
-		final EquipmentCollection eq = new EquipmentCollection();
 		eq.addEquipment("bars", "asdf");
 		eq.addEquipment("floor", "asdf");
 		eq.addEquipment("rings", "asdf");
 		eq.addEquipment("tramp", "asdf");
+		c.addClass("mmv", "asdfu",  900, 1000, 15 ,e);
+		c.addClass("mm",  "asdf",   915, 1015, 30 ,e1);
+		c.addClass("im",  "asdfx",  915, 1015, 15 ,e);
+		c.addClass("imx", "asdfx", 1000, 1100, 30 ,e2);
 		
 		final Class[] allClasses = c.getClasses();
-		final ArrayList<Class> neededClasses = new ArrayList<Class>();	
+		final ArrayList<Class> neededClasses = new ArrayList<Class>();
 		
 		final JComboBox<String> classBox = new JComboBox<String>();
 		classBox.setBounds(12, 13, 200, 37);
@@ -269,6 +268,13 @@ public class GUI extends JFrame{
 		final ClassCollection c = new ClassCollection(day);
 		Class[] allClasses = c.getClasses();
 		final EquipmentCollection eq = new EquipmentCollection();
+		
+		//testing
+		eq.addEquipment("bars", "asdf");
+		eq.addEquipment("floor", "asdf");
+		eq.addEquipment("rings", "asdf");
+		eq.addEquipment("tramp", "asdf");
+		
 		String[] allEquipment = eq.getEquipmentList();
 		final ArrayList<Class> neededEquipment = new ArrayList<Class>();
 
@@ -392,6 +398,7 @@ public class GUI extends JFrame{
 				int en = (int) Double.parseDouble(textE.getText());
 				int ro = (int) Double.parseDouble(textR.getText());
 				c.addClass(textClass.getText(), classDesc.getText(),  st, en, ro , needEquipArray);
+				c.save();
 			}
 		});
 		btnSched.setBounds(22, 400, 195, 34);
