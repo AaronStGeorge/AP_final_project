@@ -149,20 +149,6 @@ public class GUI extends JFrame{
 		//create variables
 		final ClassCollection c = new ClassCollection(day);	
 		final EquipmentCollection eq = new EquipmentCollection();
-		
-		//testing	
-		/*String[] e  ={"bars","floor","rings","tramp"};
-		String[] e1 ={"floor","rings"};
-		String[] e2 ={"bars","tramp"};
-		c.addClass("ClassA", "Bobby",  900, 1000, 15 ,e);
-		c.addClass("ClassB",  "Sam",   915, 1015, 30 ,e1);
-		c.addClass("ClassC",  "Dean",  915, 1015, 15 ,e);
-		c.addClass("ClassD", "Crowley", 1000, 1100, 30 ,e2);
-		eq.addEquipment("bars", "climbing bars");
-		eq.addEquipment("floor", "a clean floor");
-		eq.addEquipment("rings", "one to rule them all");
-		eq.addEquipment("tramp", "bouncy bouncy");*/
-		
 		final Class[] allClasses = c.getClasses();
 		final ArrayList<Class> neededClasses = new ArrayList<Class>();
 		final String[] allEquip = eq.getEquipmentList();
@@ -283,18 +269,8 @@ public class GUI extends JFrame{
 		//create variables
 		final EquipmentCollection eq = new EquipmentCollection();
 		final ClassCollection c = new ClassCollection(day);
-		
-		//testing
-		/*eq.addEquipment("bars", "climbing bars");
-		eq.addEquipment("floor", "a clean floor");
-		eq.addEquipment("rings", "one to rule them all");
-		eq.addEquipment("tramp", "bouncy bouncy");*/
-		
 		final String[] allEquipment = eq.getEquipmentList();
 		final ArrayList<String> neededEquipment = new ArrayList<String>();
-		for (int x=0; x<allEquipment.length;x++){
-			System.out.println("Equipment Piece " + x + ": " + allEquipment[x]);
-		}//make sure all the equipment is there
 
 		final JTextField textClass = new JTextField();
 		textClass.setBounds(100, 15, 160, 40);
