@@ -41,7 +41,7 @@ public class GUI extends JFrame{
 				}
 			}
 		});
-		//Testing hard-coding some classes and their equipment for Monday
+		//Testing hard-coding some classes and their equipment for Monday, should return the same result as the test class
 		EquipmentCollection eq = new EquipmentCollection();
 		ClassCollection c = new ClassCollection("Monday");
 		String[] e  ={"bars","floor","rings","tramp"};
