@@ -1,10 +1,12 @@
 package scheduling;
 import javax.swing.JOptionPane;
-
+/*
+ * This is the class that handles the control of scheduling and outputting
+ * created by Matt Detrick
+ * 12/2/14
+ */
 public class Schedule {
-   /*
-    * Since we have two ways to solve the problem, this allows you to choose which stratgey you want
-    */
+   
     String[] equipList;
     Class[] classes;
 
@@ -17,6 +19,9 @@ public class Schedule {
     {
     	this.equipList = equipList;
         this.classes = classes;
+        /*
+	    * Since we have two ways to solve the problem, this allows you to choose which stratgey you want
+	    */
     	int choice =Integer.parseInt(JOptionPane.showInputDialog("Type 1 for Dancing links or 2 for Recursion"));
     	if(choice == 1)
     	{

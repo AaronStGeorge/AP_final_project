@@ -8,7 +8,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
+/*
+ * This class is the factory for the classes and also stores all of the classes for 
+ * that day in memory. There is also the functionality to store those classes in a text file for later
+ * use
+ * created by Matt Detrick
+ * 11/10/14
+ */
 
 public class ClassCollection 
 {

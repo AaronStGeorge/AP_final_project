@@ -3,13 +3,20 @@ package scheduling;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
+/*
+ * These are used to output the schedule as a .xls file
+ */
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.util.HSSFColor;
+/*
+ * This class outputs the solution to a .xls file
+ * created by Matt Detrick
+ * 12/2/14
+ */
 public class Outputter 
 {
 	HSSFWorkbook wb ;  
@@ -31,6 +38,9 @@ public class Outputter
 	    addClasses();
 	    writeToFile();
 	}
+	/*
+	 * This adds the equipment names to the top of their respective columns
+	 */
 	private void addEquipNames()
 	{
 		HSSFRow row = sheet1.createRow((short)0);
@@ -40,6 +50,9 @@ public class Outputter
 		    cell.setCellValue(equipList[i]);
 	    }
 	}
+	/*
+	 * This adds the times to the start of each row
+	 */
 	private void addTimes()
 	{
 		HSSFRow row;
@@ -54,6 +67,9 @@ public class Outputter
 			
 		}
 	}
+	/*
+	 * This basically copies the input schedule to its equivalent representation in excel
+	 */
 	private void addClasses()
 	{
 		HSSFCell cell;
@@ -83,6 +99,9 @@ public class Outputter
 			}
 		}
 	}
+	/*
+	 * Populates an array of colors that can be used to help distinguish between the classes
+	 */
 	private void setColors()
 	{
 		int i =4;
@@ -106,6 +125,9 @@ public class Outputter
 		    i--;
 		}
 	}
+	/*
+	 * This simply writes the workbook to the actual .xls file using an outputStream
+	 */
 	private void writeToFile()
 	{
 		 FileOutputStream fileOut=null;

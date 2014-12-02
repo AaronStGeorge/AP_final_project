@@ -1,5 +1,9 @@
 package scheduling;
-
+/*
+ * This is the class object
+ * created by Matt Detrick
+ * 11/10/14
+ */
 public class Class 
 {
 	private String name, teacher;

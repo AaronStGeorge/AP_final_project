@@ -1,5 +1,11 @@
 package scheduling;
-
+/*
+ * This class wraps the recursiveSolution and formats the input from the GUI into 
+ * what the recursiveSolution needs.
+ * created by Matt Detrick
+ * 12/2/14
+ * 
+ */
 public class RecursiveInput implements InputAdapter 
 {
 	int[][][] possibilities;
@@ -12,21 +18,38 @@ public class RecursiveInput implements InputAdapter
 		this.classes = classes;
 		this.equipList = equipList;
 		equipListSize = equipList.length;
+		/*
+		 * The sorting is used to find the earliest start time and latest endtime of
+		 * the classes
+		 */
 		sortClassesEnd();
         int end = classes[classes.length - 1].getEnd();
         sortClassesStart();
         int start = classes[0].getStart();
+        /*
+         * this calculates how many 15 min slots are needed based on the start
+         * and end times found above
+         */
         time = Time.numOfRotationsNeeded(start, end, 15);
         possibilities = new int[time][classes.length][];
+        /*
+         * This adds the classes to the three-dimensional array
+         */
         addClasses();
 	}
 
 	@Override
 	public int[][] schedule() {
+		/*
+		 * Here is where the RecursiveSolution is called and the solution returned
+		 */
 		RecursiveSolution solver = new RecursiveSolution(possibilities, classes, time, equipListSize);
 		return solver.getSchedule();
 	}
-	
+	/*
+	 * uses a simple bubble sort to sort the classes as the list will 
+	 * be small
+	 */
 	private void sortClassesStart() {
         int c, d, n = classes.length;
         Class swap;
@@ -40,7 +63,10 @@ public class RecursiveInput implements InputAdapter
             }
         }
     }
-
+	/*
+	 * uses a simple bubble sort to sort the classes as the list will 
+	 * be small
+	 */
     private void sortClassesEnd() {
         int c, d, n = classes.length;
         Class swap;
@@ -54,6 +80,11 @@ public class RecursiveInput implements InputAdapter
             }
         }
     }
+    /*
+     * This adds in the classes. Each class is represented as a column and each
+     * possibilities[a][b] holds the list of equipment that that class wishes to use for all
+     * of the time slots of that class
+     */
     private void addClasses() {
         initializeEquipLists();
         int startTime = classes[0].getStart();
@@ -71,7 +102,9 @@ public class RecursiveInput implements InputAdapter
             }
         }
     }
-
+    /*
+     * This simply initializes the three dimensional array to have arrays of all 0's
+     */
     private void initializeEquipLists() {
         for (int i = 0; i < possibilities.length; i++) {
             for (int j = 0; j < possibilities[i].length; j++) {
@@ -81,6 +114,10 @@ public class RecursiveInput implements InputAdapter
         }
     }
 
+    /*
+     * This helper method find the indexes that correspond to the equipment that the class
+     * needs in the equipList array
+     */
     private int[] findEquipIndexes(Class c) {
         String[] equipment = c.getEquipment();
         int[] indexes = new int[equipment.length];
@@ -93,6 +130,9 @@ public class RecursiveInput implements InputAdapter
         }
         return indexes;
     }
+    /*
+     * This is used to print the possibilities matrix for testing/debugging
+     */
     /*
     private void printPossibilities() {
         System.out.println("===================== Possibilities");

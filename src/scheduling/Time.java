@@ -1,6 +1,8 @@
 package scheduling;
 /*
  * This class is used to do operations with integer time values
+ * created by Matt Detrick
+ * 12/2/14
  */
 public class Time 
 {

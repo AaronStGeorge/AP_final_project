@@ -8,7 +8,13 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
-
+/*
+ * This is the class that has the equipmentFactory and that also stores the
+ * equipment created. It also has the functionality to save the equipment in
+ * a text file for further use
+ * created by Matt Detrick
+ * 11/10/14
+ */
 
 public class EquipmentCollection
 {
