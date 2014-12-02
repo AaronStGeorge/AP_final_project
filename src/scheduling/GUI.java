@@ -41,7 +41,22 @@ public class GUI extends JFrame{
 				}
 			}
 		});
-		
+		//Testing hardcoding some classes and their equipment for Monday
+		EquipmentCollection eq = new EquipmentCollection();
+		ClassCollection c = new ClassCollection("Monday");
+		String[] e  ={"bars","floor","rings","tramp"};
+		String[] e1 ={"floor","rings"};
+		String[] e2 ={"bars","tramp"};
+		c.addClass("Paper", "Bobby",  900, 1000, 15 ,e);
+		c.addClass("Winning",  "Sam",   915, 1015, 30 ,e1);
+		c.addClass("Losing",  "Dean",  915, 1015, 15 ,e);
+		c.addClass("Plastic", "Crowley", 1000, 1100, 30 ,e2);
+		c.save();
+		eq.addEquipment("bars", "climbing bars");
+		eq.addEquipment("floor", "a clean floor");
+		eq.addEquipment("rings", "one to rule them all");
+		eq.addEquipment("tramp", "bouncy bouncy");
+		eq.save();
 	}
 
 	//create the main JFrame
@@ -137,18 +152,18 @@ public class GUI extends JFrame{
 		final ClassCollection c = new ClassCollection(day);	
 		final EquipmentCollection eq = new EquipmentCollection();
 		
-		//testing
-		String[] e  ={"bars","floor","rings","tramp"};
+		//testing	
+		/*String[] e  ={"bars","floor","rings","tramp"};
 		String[] e1 ={"floor","rings"};
 		String[] e2 ={"bars","tramp"};
-		eq.addEquipment("bars", "asdf");
-		eq.addEquipment("floor", "asdf");
-		eq.addEquipment("rings", "asdf");
-		eq.addEquipment("tramp", "asdf");
-		c.addClass("mmv", "asdfu",  900, 1000, 15 ,e);
-		c.addClass("mm",  "asdf",   915, 1015, 30 ,e1);
-		c.addClass("im",  "asdfx",  915, 1015, 15 ,e);
-		c.addClass("imx", "asdfx", 1000, 1100, 30 ,e2);
+		c.addClass("ClassA", "Bobby",  900, 1000, 15 ,e);
+		c.addClass("ClassB",  "Sam",   915, 1015, 30 ,e1);
+		c.addClass("ClassC",  "Dean",  915, 1015, 15 ,e);
+		c.addClass("ClassD", "Crowley", 1000, 1100, 30 ,e2);
+		eq.addEquipment("bars", "climbing bars");
+		eq.addEquipment("floor", "a clean floor");
+		eq.addEquipment("rings", "one to rule them all");
+		eq.addEquipment("tramp", "bouncy bouncy");*/
 		
 		final Class[] allClasses = c.getClasses();
 		final ArrayList<Class> neededClasses = new ArrayList<Class>();
@@ -265,18 +280,21 @@ public class GUI extends JFrame{
 		clSched.setLayout(null);
 		
 		//create variables
-		final ClassCollection c = new ClassCollection(day);
-		Class[] allClasses = c.getClasses();
 		final EquipmentCollection eq = new EquipmentCollection();
+		final ClassCollection c = new ClassCollection(day);
+		//Class[] allClasses = c.getClasses();
 		
 		//testing
-		eq.addEquipment("bars", "asdf");
-		eq.addEquipment("floor", "asdf");
-		eq.addEquipment("rings", "asdf");
-		eq.addEquipment("tramp", "asdf");
+		/*eq.addEquipment("bars", "climbing bars");
+		eq.addEquipment("floor", "a clean floor");
+		eq.addEquipment("rings", "one to rule them all");
+		eq.addEquipment("tramp", "bouncy bouncy");*/
 		
 		String[] allEquipment = eq.getEquipmentList();
 		final ArrayList<Class> neededEquipment = new ArrayList<Class>();
+		for (int x=0; x<allEquipment.length;x++){
+			System.out.println("Equipment Piece " + x + ": " + allEquipment[x]);
+		}
 
 		final JTextField textClass = new JTextField();
 		textClass.setBounds(100, 15, 160, 45);

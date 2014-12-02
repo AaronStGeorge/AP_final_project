@@ -28,6 +28,7 @@ public class ClassCollection
 			String[] equip;
 			while ((line = reader.readLine()) != null) 
 			{
+				//NOTE: class names with spaces breaks things
 				scan = new Scanner(line);
 				name = scan.next();
 				teacher = scan.next();
