@@ -3,7 +3,6 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Event;
 import java.awt.EventQueue;
-
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,11 +13,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.JTextComponent;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-
 import javax.swing.JFrame;
 
 public class GUI extends JFrame{
