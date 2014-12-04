@@ -39,25 +39,9 @@ public class GUI extends JFrame{
 				}
 			}
 		});
-		//Testing hard-coding some classes and their equipment for Monday, should return the same result as the test class
-		EquipmentCollection eq = new EquipmentCollection();
-		ClassCollection c = new ClassCollection("Monday");
-		String[] e  ={"bars","floor","rings","tramp"};
-		String[] e1 ={"floor","rings"};
-		String[] e2 ={"bars","tramp"};
-		c.addClass("Paper", "Bobby",  900, 1000, 15 ,e);
-		c.addClass("Winning",  "Sam",   915, 1015, 30 ,e1);
-		c.addClass("Losing",  "Dean",  915, 1015, 15 ,e);
-		c.addClass("Plastic", "Crowley", 1000, 1100, 30 ,e2);
-		c.save();
-		eq.addEquipment("bars", "Climbing");
-		eq.addEquipment("floor", "CleanFloor");
-		eq.addEquipment("rings", "1ToRuleThemAll");
-		eq.addEquipment("tramp", "BouncyBouncy");
-		eq.save();
 	}
 
-	//create the main JFrame
+	//create the main JFrame that holds all the JPanels
 	public GUI(){
 		setTitle("Scheduling Assistant");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
