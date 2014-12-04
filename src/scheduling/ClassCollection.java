@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 /*
@@ -18,7 +19,8 @@ import java.util.Scanner;
 
 public class ClassCollection 
 {
-	private List<Class> classList = new ArrayList<Class>();
+	private HashMap<String, Class> classList = new HashMap<String, Class>();
+	//private List<Class> classList = new ArrayList<Class>();
 	boolean changed = false;
 	String day;
 	public ClassCollection(String day) 
@@ -57,41 +59,25 @@ public class ClassCollection
 			try {
 				new FileWriter(day+"classes.txt");
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	private void add(String name, String teacher,int s, int e, int r, String[] equip)
 	{
-		classList.add(new Class(name, teacher, s,e,r, equip));
+		classList.put(name, new Class(name, teacher, s,e,r, equip));
 	}
 	/*
-	 * Time is viewed as a normal time number from a digital watch minus the colon. The rotation should be passed in minutes
+	 * Time is viewed as a normal time number from a digital watch minus the colon. 
+	 * The rotation should be passed in minutes
 	 */
 	public void addClass(String name, String desc, int s, int e, int r, String[] equip)
 	{
-		boolean added = false;
-		int i =0;
-		while(!added)
-		{
-			if(i==classList.size())
-			{
-				added=true;
-				classList.add(new Class(name, desc, s,e,r, equip));
-			}
-			else if(s>classList.get(i).getStart())
-				i++;
-			else
-			{
-				added=true;
-				classList.add(i, new Class(name, desc, s,e,r, equip));
-			}
-		}
+		
+		classList.put(name, new Class(name, desc, s,e,r, equip));
 		
 		changed = true;
 	}
@@ -99,8 +85,9 @@ public class ClassCollection
 	{
 		return classList.get(i);
 	}
-	public void removeClass()
+	public void removeClass(Class c)
 	{
+		classList.remove(c.getName());
 		changed = true;
 	}
 	public String classInfo()
@@ -140,7 +127,6 @@ public class ClassCollection
 				}
 				out.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			System.out.println("Class changes saved");

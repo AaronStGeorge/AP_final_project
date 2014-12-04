@@ -60,9 +60,9 @@ public class EquipmentCollection
 		add(name, desc);
 		changed = true;
 	}
-	public void removeEquipment()
+	public void removeEquipment(String name)
 	{
-		//TODO
+		equipList.remove(name);
 		changed = true;
 	}
 	public String equipmentInfo()
