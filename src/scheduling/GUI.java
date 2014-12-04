@@ -66,7 +66,8 @@ public class GUI extends JFrame{
 	}
 
 	//*******************************************************************************************************\\
-	//JPanel for day selection
+	//JPanel for day selection; has 5 buttons, one for each day, when selected it takes us to the day scheduling
+	//panel and sets a global variable to the day that was selected
 	public void mainFrame() {
 		main = new JPanel();
 		main.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -139,14 +140,16 @@ public class GUI extends JFrame{
 	}
 
 	//*******************************************************************************************************\\	
-	//JPanel for the day scheduling
+	//JPanel for the day scheduling; lists out all the classes that are saved on the current days text file. 
+	//From here you can add these class to the "to-be-scheduled" side and when you got them all smack the sched button
 	public void daySched() {
 		dSched = new JPanel();
 		dSched.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(dSched);
 		dSched.setLayout(null);
 		
-		//create variables
+		//create variables; class array for all the classes, class arrayList for ease of adding and removing, and then
+		//a string array for the equipment
 		final ClassCollection c = new ClassCollection(day);	
 		final EquipmentCollection eq = new EquipmentCollection();
 		final Class[] allClasses = c.getClasses();
@@ -158,14 +161,14 @@ public class GUI extends JFrame{
 		dSched.add(classBox);
 		for (int x=0; x < allClasses.length; x++){
 			classBox.addItem(allClasses[x].getName());
-		}
+		}//add class names to the left combo box
 
 		final JComboBox<String> schedBox = new JComboBox<String>();
 		schedBox.setBounds(363, 13, 200, 37);
 		dSched.add(schedBox);
 		for (int x=0; x < neededClasses.size(); x++){
 			schedBox.addItem(neededClasses.get(x).getName());
-		}
+		}//add the class names of the class you added to the "to-be-scheduled" comboBox
 
 		final JTextArea txtClasses = new JTextArea();
 		txtClasses.setBounds(12, 63, 200, 302);
@@ -173,7 +176,7 @@ public class GUI extends JFrame{
 		txtClasses.setEditable(false);
 		for (int x=0; x < allClasses.length; x++){
 			txtClasses.append(allClasses[x].getName() + "\n");
-		}
+		}//add class names to the left textArea
 
 		final JTextArea txtSched = new JTextArea();
 		txtSched.setBounds(363, 63, 200, 300);
@@ -181,7 +184,7 @@ public class GUI extends JFrame{
 		txtSched.setEditable(false);
 		for (int x=0; x < neededClasses.size(); x++){
 			txtSched.append(neededClasses.get(x).getName());
-		}
+		}//add the class names of the class you added to the "to-be-scheduled" 
 		
 		JButton btnAdd = new JButton("Add -->");
 		btnAdd.addActionListener(new ActionListener() {
@@ -192,7 +195,7 @@ public class GUI extends JFrame{
 				txtSched.append(classBox.getSelectedItem().toString() + "\n");
 				repaint();
 			}
-		});
+		});//add to the needed arrayList, and then add them to the comboBox and textAreas appropriately
 		btnAdd.setBounds(224, 69, 127, 37);
 		dSched.add(btnAdd);
 		
@@ -200,12 +203,12 @@ public class GUI extends JFrame{
 		btnRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				neededClasses.remove(schedBox.getSelectedIndex());
-				//redraw the comboBox
+				//remove and readd items to the comboBox
 				schedBox.removeAllItems();
 				for (int x=0; x < neededClasses.size(); x++){
 					schedBox.addItem(neededClasses.get(x).getName());
 				}
-				//redraw the textarea items
+				//remove and readd items to the textArea
 				txtSched.setText("");
 				for (int x=0; x < neededClasses.size(); x++){
 					txtSched.append((String) neededClasses.get(x).getName() + "\n");
@@ -222,7 +225,7 @@ public class GUI extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				Class[] needClassArray = neededClasses.toArray(new Class[neededClasses.size()]);
 				Schedule s = new Schedule(allEquip, needClassArray); //pass in the entire equip list, the class checks it anyways
-			}
+			}//turn the arrayList into an array and then pass it into the schedule method
 		});
 		btnSchedule.setBounds(12, 376, 200, 61);
 		dSched.add(btnSchedule);
@@ -233,7 +236,7 @@ public class GUI extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				dSched.setVisible(false);
 				classSched();
-			}
+			}//change to the new class panel
 		});
 		btnNewClass.setBounds(224, 278, 127, 37);
 		dSched.add(btnNewClass);
@@ -252,21 +255,21 @@ public class GUI extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				dSched.setVisible(false);
 				mainFrame();
-			}
+			}//go back to the day selection panel
 		});
 		btnCancel.setBounds(363, 376, 200, 61);
 		dSched.add(btnCancel);
 	}
 
 	//*******************************************************************************************************\\	
-	//class scheduling frame
+	//class scheduling frame; takes user input for all the required constructor pieces to create a new class object
 	public void classSched() {
 		clSched = new JPanel();
 		clSched.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(clSched);
 		clSched.setLayout(null);
 		
-		//create variables
+		//create variables; make a string array for all the equipment and an arrayList for adding and removing of equipment
 		final EquipmentCollection eq = new EquipmentCollection();
 		final ClassCollection c = new ClassCollection(day);
 		final String[] allEquipment = eq.getEquipmentList();
@@ -321,7 +324,7 @@ public class GUI extends JFrame{
 		clSched.add(comboBoxEquip);
 		for (int x=0; x < allEquipment.length; x++){
 			comboBoxEquip.addItem(allEquipment[x].toString());
-		}
+		}//add equipment into the top comboBox
 		
 		final JComboBox<String> cbNEquip = new JComboBox<String>();
 		cbNEquip.setBounds(324, 90, 200, 22);
@@ -338,13 +341,13 @@ public class GUI extends JFrame{
 
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
-			//action listener for the add button (to add from drop down box to the text area)
+			//action listener for the add button
 			public void actionPerformed(ActionEvent e) {
 				neededEquipment.add((String) comboBoxEquip.getSelectedItem().toString());
 				cbNEquip.addItem(comboBoxEquip.getSelectedItem().toString());
 				equipAdded.append(comboBoxEquip.getSelectedItem().toString() + "\n");
 				repaint();
-			}
+			}//Add from the all comboBox to the needed comboBox and textArea
 		});
 		btnAdd.setBounds(310, 60, 97, 25);
 		clSched.add(btnAdd);
@@ -354,12 +357,12 @@ public class GUI extends JFrame{
 			//action listener for the add button (to add from drop down box to the text area)
 			public void actionPerformed(ActionEvent e) {
 				neededEquipment.remove(cbNEquip.getSelectedIndex());
-				//redraw the comboBox
+				//remove an item from the needed comboBox and re-add everything
 				cbNEquip.removeAllItems();
 				for (int x=0; x < neededEquipment.size(); x++){
 					cbNEquip.addItem(neededEquipment.get(x).toString());
 				}
-				//redraw the textarea items
+				//remove and item from the texAarea and re-add everything
 				equipAdded.setText("");
 				for (int x=0; x < neededEquipment.size(); x++){
 					equipAdded.append((String) neededEquipment.get(x).toString() + "\n");
@@ -372,7 +375,7 @@ public class GUI extends JFrame{
 		
 		JButton btnMenu = new JButton("Back");
 		btnMenu.addActionListener(new ActionListener() {
-			//action listener for the menu button
+			//action listener for the menu button; takes you back to day sched
 			public void actionPerformed(ActionEvent e) {
 				clSched.setVisible(false);
 				daySched();
@@ -388,14 +391,15 @@ public class GUI extends JFrame{
 				String[] needEquipArray = new String[neededEquipment.size()];
 				for (int x = 0; x < needEquipArray.length; x++){
 					needEquipArray[x] = neededEquipment.get(x).toString();
-				}
+				}//change the arrayList to an array per constructor requirements
 				int st = Integer.parseInt(textS.getText());
 				int en = Integer.parseInt(textE.getText());
 				int ro = Integer.parseInt(textR.getText());
 				c.addClass(textClass.getText(), classDesc.getText(),  st, en, ro , needEquipArray);
 				c.save();
+				daySched();//take us back to the day scheduling
 			}
-		});
+		});//grab all the variables and pass them into the createClass method
 		btnSched.setBounds(22, 400, 195, 34);
 		clSched.add(btnSched);
 
@@ -423,7 +427,7 @@ public class GUI extends JFrame{
 	}
 
 	//*******************************************************************************************************\\	
-	//new equipment frame
+	//new equipment frame; takes in user input for all required pieces to create an equipment object
 	public void newEquip() {
 		aEquip = new JPanel();
 		aEquip.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -456,14 +460,15 @@ public class GUI extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				eq.addEquipment(equipName.getText(), equipDesc.getText());
 				eq.save();
+				classSched();//take us back after creation
 			}
-		});
+		});//Pass the appropriate variables into the addEquip method
 		btnSubmit.setBounds(25, 215, 150, 40);
 		aEquip.add(btnSubmit);
 
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
-			//action listener for the cancel button
+			//action listener for the cancel button; returns us to the class creation frame
 			public void actionPerformed(ActionEvent e) {
 				aEquip.setVisible(false);
 				classSched();
