@@ -17,14 +17,25 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+/*
+ * Schedule Assistant GUI: This class handles the GUI that interfaces swing components to the back-end scheduling code
+ * It is comprised of 4 JPanels which do the following: (NOTE: these descriptions are also above each method)
+ * --------------------------------------------------------------------------------------------------------------------------
+ * mainFrame: one button for each day, takes us to the daySched panel and sets a global variable to the day that was selected
+ * daySched: lists out all the classes that are saved on the current days text file and allows users to pick amongst them
+ * clSched: takes user input for all the required constructor pieces to create a new class object
+ * aEquip: takes in user input for all required pieces to create an equipment object
+ * --------------------------------------------------------------------------------------------------------------------------
+ * Created by: Coby Greenhagen, finished on 12/4/14
+ */
 
 public class GUI extends JFrame{
 
-	//create variables
-	private static JPanel main;
+	//create variables: JPanels and global variable for the day selection
+	private static JPanel main;	
+	private JPanel dSched;
 	private JPanel clSched;
 	private JPanel aEquip;
-	private JPanel dSched;
 	static String day;
 
 	//start the GUI
@@ -39,6 +50,13 @@ public class GUI extends JFrame{
 				}
 			}
 		});
+		//testing
+		ClassCollection c = new ClassCollection("monday");	
+		String[] e0 = {"bar", "floor", "tramp", "disco"};
+		String[] e1 = {"ring", "gym"};
+		c.addClass("Jungle", "Joe", 1000, 1100, 15, e0);
+		c.addClass("Support", "Kat", 1100, 1200, 30, e1);
+		c.save();
 	}
 
 	//create the main JFrame that holds all the JPanels
@@ -228,7 +246,17 @@ public class GUI extends JFrame{
 		JButton btnDeleteClass = new JButton("Delete Class");
 		btnDeleteClass.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//need a delete class method
+				//remove it from classCollection and re-save the txt file
+				int b = classBox.getSelectedIndex();
+				c.removeClass(allClasses[b]);
+				c.save();
+				Class[] allClasses = c.getClasses();
+				//remove items, re-add them, and redraw
+				classBox.removeAllItems();
+				for (int x=0; x < allClasses.length; x++){
+					classBox.addItem(allClasses[x].getName());
+				}
+				repaint();
 			}
 		});
 		btnDeleteClass.setBounds(224, 328, 127, 37);
@@ -381,6 +409,7 @@ public class GUI extends JFrame{
 				int ro = Integer.parseInt(textR.getText());
 				c.addClass(textClass.getText(), classDesc.getText(),  st, en, ro , needEquipArray);
 				c.save();
+				clSched.setVisible(false);
 				daySched();//take us back to the day scheduling
 			}
 		});//grab all the variables and pass them into the createClass method
@@ -403,7 +432,16 @@ public class GUI extends JFrame{
 		btnDelEquip.addActionListener(new ActionListener() {
 			//action listener for delete equip button
 			public void actionPerformed(ActionEvent arg0) {
-				//Need a way to delete a piece of equip
+				//remove it from equipmentCollection and re-save the txt file
+				eq.removeEquipment(comboBoxEquip.getSelectedItem().toString());
+				eq.save();
+				String[] allEquipment = eq.getEquipmentList();
+				//remove items, re-add them, and redraw
+				comboBoxEquip.removeAllItems();
+				for (int x=0; x < allEquipment.length; x++){
+					comboBoxEquip.addItem(allEquipment[x]);
+				}
+				repaint();
 			}
 		});
 		btnDelEquip.setBounds(330, 400, 195, 34); 
@@ -444,6 +482,7 @@ public class GUI extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				eq.addEquipment(equipName.getText(), equipDesc.getText());
 				eq.save();
+				aEquip.setVisible(false);
 				classSched();//take us back after creation
 			}
 		});//Pass the appropriate variables into the addEquip method
