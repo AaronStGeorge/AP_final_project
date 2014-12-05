@@ -6,7 +6,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 /*
@@ -97,12 +99,9 @@ public class ClassCollection
 	
 	public Class[] getClasses()
 	{
-		Class[] classes = new Class[classList.size()];
-		for(int i =0;i<classList.size();i++)
-		{
-			classes[i]=classList.get(i);
-		}
-		return classes;
+		Collection<Class> c = classList.values();
+		Class[] c1 = new Class[1];
+		return c.toArray(c1);
 	}
 	
 	public void save()
@@ -112,16 +111,15 @@ public class ClassCollection
 			try
 			{
 				BufferedWriter out = new BufferedWriter(new FileWriter(day+"classes.txt"));
-				int size = classList.size();
-				String[] equip;
-				for(int i =0;i<size;i++)
+				Iterator<String> keys = classList.keySet().iterator();
+				while(keys.hasNext())
 				{
-					Class c = classList.remove(0);
+					Class c = classList.get(keys.next());
 					out.write(c.getName()+" "+c.getTeacher()+" "+c.getStart()+" "+c.getEnd()+" "+c.getRotation()+" ");
-					equip=c.getEquipment();
-					for(int j =0;j<equip.length;j++)
+					String[] e = c.getEquipment();
+					for(int i=0;i<e.length;i++)
 					{
-						out.write(equip[j]+" ");
+						out.write(e[i]+" ");
 					}
 					out.write("\n");
 				}
