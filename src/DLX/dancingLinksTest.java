@@ -363,12 +363,43 @@ public class dancingLinksTest {
 
         for (ArrayList<Object[]> i : allSol) {
             System.out.println("sol ========");
+            for (Object[] oa : i) {
+                System.out.println(Arrays.deepToString(oa));
+            }
 
         }
 
         Assert.assertTrue(allSol.size() == 2);
         Assert.assertTrue(sol1.size() == 3);
 
+    }
+
+    @Test
+    public void testDlxWithSecondaryColumn() throws Exception {
+
+        byte[][] testMatrix1 = new byte[][]{
+                {0, 0, 1, 0, 1, 1, 0, 0},
+                {1, 0, 0, 1, 0, 0, 1, 0},
+                {0, 1, 1, 0, 0, 1, 0, 0},
+                {1, 0, 0, 1, 0, 0, 0, 0},
+                {0, 1, 0, 0, 0, 0, 1, 0},
+                {0, 0, 0, 1, 1, 0, 1, 0},
+                {0, 1, 0, 0, 0, 0, 1, 0} // duplicate row to test that all solutions are actually produced
+        };
+
+        Object[] listHeaders1 = new String[]{"0", "1", "2", "3", "4", "5", "6", "7"};
+
+        ArrayList<ArrayList<Object[]>> allSol1 = dancingLinks.allSolutions(testMatrix1, listHeaders1, 1);
+
+        for (ArrayList<Object[]> i : allSol1) {
+            System.out.println("sol ========");
+            for (Object[] oa : i) {
+                System.out.println(Arrays.deepToString(oa));
+            }
+
+        }
+
+        Assert.assertTrue(allSol1.size() == 2);
     }
 
     public void printArray(byte[][] m) {

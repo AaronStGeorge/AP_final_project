@@ -6,31 +6,25 @@ package scheduling;
  * 12/2/14
  * 
  */
-public class RecursiveInput implements InputAdapter 
+public class RecursiveInput extends InputAdapter
 {
 	int[][][] possibilities;
 	String[] equipList;
 	Class[] classes;
-	int time, equipListSize;
+    int equipListSize;
 
 	@Override
 	public void changeInput(String[] equipList, Class[] classes) {
 		this.classes = classes;
 		this.equipList = equipList;
 		equipListSize = equipList.length;
-		/*
-		 * The sorting is used to find the earliest start time and latest endtime of
-		 * the classes
-		 */
-		sortClassesEnd();
-        int end = classes[classes.length - 1].getEnd();
-        sortClassesStart();
-        int start = classes[0].getStart();
+
         /*
          * this calculates how many 15 min slots are needed based on the start
          * and end times found above
          */
-        time = Time.numOfRotationsNeeded(start, end, 15);
+        calcTimeAndStart();
+
         possibilities = new int[time][classes.length][];
         /*
          * This adds the classes to the three-dimensional array
@@ -38,7 +32,8 @@ public class RecursiveInput implements InputAdapter
         addClasses();
 	}
 
-	@Override
+
+    @Override
 	public int[][] schedule() {
 		/*
 		 * Here is where the RecursiveSolution is called and the solution returned
@@ -46,40 +41,6 @@ public class RecursiveInput implements InputAdapter
 		RecursiveSolution solver = new RecursiveSolution(possibilities, classes, time, equipListSize);
 		return solver.getSchedule();
 	}
-	/*
-	 * uses a simple bubble sort to sort the classes as the list will 
-	 * be small
-	 */
-	private void sortClassesStart() {
-        int c, d, n = classes.length;
-        Class swap;
-        for (c = 0; c < (n - 1); c++) {
-            for (d = 0; d < n - c - 1; d++) {
-                if (classes[d].getStart() > classes[d + 1].getStart()) {
-                    swap = classes[d];
-                    classes[d] = classes[d + 1];
-                    classes[d + 1] = swap;
-                }
-            }
-        }
-    }
-	/*
-	 * uses a simple bubble sort to sort the classes as the list will 
-	 * be small
-	 */
-    private void sortClassesEnd() {
-        int c, d, n = classes.length;
-        Class swap;
-        for (c = 0; c < (n - 1); c++) {
-            for (d = 0; d < n - c - 1; d++) {
-                if (classes[d].getEnd() > classes[d + 1].getEnd()) {
-                    swap = classes[d];
-                    classes[d] = classes[d + 1];
-                    classes[d + 1] = swap;
-                }
-            }
-        }
-    }
     /*
      * This adds in the classes. Each class is represented as a column and each
      * possibilities[a][b] holds the list of equipment that that class wishes to use for all
@@ -114,22 +75,7 @@ public class RecursiveInput implements InputAdapter
         }
     }
 
-    /*
-     * This helper method find the indexes that correspond to the equipment that the class
-     * needs in the equipList array
-     */
-    private int[] findEquipIndexes(Class c) {
-        String[] equipment = c.getEquipment();
-        int[] indexes = new int[equipment.length];
-        for (int i = 0; i < equipment.length; i++) 
-        {
-            int j = 0;
-            while (!equipment[i].equals(equipList[j]))
-                j++;
-            indexes[i] = j;
-        }
-        return indexes;
-    }
+
     /*
      * This is used to print the possibilities matrix for testing/debugging
      */

@@ -8,12 +8,16 @@ import java.util.stream.IntStream;
 
 public class dancingLinks {
 
-    static ArrayList<Object[]> firstSolution(byte[][] matrix, Object[] columnNames, int numSecondaryColumn) {
-        return dlx(matrix, columnNames, numSecondaryColumn, true).get(0);
+    public static ArrayList<Object[]> firstSolution(byte[][] matrix, Object[] columnNames, int numSecondaryColumn) {
+        ArrayList<ArrayList<Object[]>> sol = dlx(matrix, columnNames, numSecondaryColumn, true);
+        if (sol.size() == 0) throw new IllegalArgumentException("No solution possible");
+        return sol.get(0);
     }
 
-    static ArrayList<ArrayList<Object[]>> allSolutions(byte[][] matrix, Object[] columnNames, int numSecondaryColumn) {
-        return dlx(matrix, columnNames, numSecondaryColumn, false);
+    public static ArrayList<ArrayList<Object[]>> allSolutions(byte[][] matrix, Object[] columnNames, int numSecondaryColumn) {
+        ArrayList<ArrayList<Object[]>> sol = dlx(matrix, columnNames, numSecondaryColumn, false);
+        if (sol.size() == 0) throw new IllegalArgumentException("No solution possible");
+        return sol;
     }
 
     /**

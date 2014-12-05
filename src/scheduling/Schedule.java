@@ -1,5 +1,6 @@
 package scheduling;
-import javax.swing.JOptionPane;
+
+import javax.swing.*;
 /*
  * This is the class that handles the control of scheduling and outputting
  * created by Matt Detrick
@@ -25,13 +26,17 @@ public class Schedule {
     	int choice =Integer.parseInt(JOptionPane.showInputDialog("Type 1 for Dancing links or 2 for Recursion"));
     	if(choice == 1)
     	{
-    		//TODO add dancing links implementation
-    	}
+            InputAdapter dlxInput = new DLXInput();
+            dlxInput.changeInput(equipList, classes);
+            new Outputter(dlxInput.schedule(), equipList, classes);
+        }
     	else if(choice == 2)
     	{
     		InputAdapter inputer = new RecursiveInput();
     		inputer.changeInput(equipList, classes);
-    		//no output adapter needed, the solution output is already in the right form
+            // Note inputer.changeInput will sort classes by start time this is a necessary side effect.
+            // Outputter will not work without this.
+            //no output adapter needed, the solution output is already in the right form
     		new Outputter(inputer.schedule(), equipList, classes );
     	}
     }

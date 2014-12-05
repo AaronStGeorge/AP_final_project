@@ -1,8 +1,10 @@
 package scheduling;
 
-import org.junit.*;
 
-import java.util.*;
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.util.Random;
 
 
 public class ScheduleTest {
@@ -12,22 +14,22 @@ public class ScheduleTest {
         int[] testArray = new int[]{1,2,3,4,5,6,7,8,9,10};
         for (int i = 0; i < 10; i++){
             shuffleArray(testArray);
-            Assert.assertTrue(Schedule.checkForDuplicates(testArray));
+            Assert.assertTrue(RecursiveSolution.checkForDuplicates(testArray));
         }
 
         testArray = new int[]{1,1,3,4,5,6,7,8,9,10};
         for (int i = 0; i < 10; i++){
             shuffleArray(testArray);
-            Assert.assertFalse(Schedule.checkForDuplicates(testArray));
+            Assert.assertFalse(RecursiveSolution.checkForDuplicates(testArray));
         }
 
         testArray = new int[]{-1,-1,-1,-1,-1};
-        Assert.assertTrue(Schedule.checkForDuplicates(testArray));
+        Assert.assertTrue(RecursiveSolution.checkForDuplicates(testArray));
 
         testArray = new int[]{1,1,-1,-1,-1,-1,-1,-1,-1,-1};
         for (int i = 0; i < 10; i++){
             shuffleArray(testArray);
-            Assert.assertFalse(Schedule.checkForDuplicates(testArray));
+            Assert.assertFalse(RecursiveSolution.checkForDuplicates(testArray));
         }
     }
 
@@ -39,23 +41,23 @@ public class ScheduleTest {
                 {-1, 2,-1},
                 {-1,-1, 2},
         };
-        Assert.assertTrue(Schedule.gridValid(testGrid));
+        Assert.assertTrue(RecursiveSolution.gridValid(testGrid));
 
         testGrid = new int[][]  {
                 {1,2,3},
                 {2,3,1},
                 {3,1,2},
         };
-        Assert.assertTrue(Schedule.gridValid(testGrid));
+        Assert.assertTrue(RecursiveSolution.gridValid(testGrid));
 
         // check repeat in row returns false
         testGrid[0][0] = 2;
-        Assert.assertFalse(Schedule.gridValid(testGrid));
+        Assert.assertFalse(RecursiveSolution.gridValid(testGrid));
         testGrid[0][0] = 1;
 
         // check repeat in column returns false
         testGrid[0] = testGrid[1];
-        Assert.assertFalse(Schedule.gridValid(testGrid));
+        Assert.assertFalse(RecursiveSolution.gridValid(testGrid));
     }
 
     // Implementing Fisher–Yates shuffle
