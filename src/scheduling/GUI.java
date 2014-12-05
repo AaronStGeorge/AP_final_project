@@ -3,8 +3,10 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Event;
 import java.awt.EventQueue;
+
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -13,9 +15,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.JTextComponent;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+
 import javax.swing.JFrame;
 /*
  * Schedule Assistant GUI: This class handles the GUI that interfaces swing components to the back-end scheduling code
@@ -48,15 +52,15 @@ public class GUI extends JFrame{
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			}
+			}	
 		});
 		//testing
-		ClassCollection c = new ClassCollection("monday");	
+		/*ClassCollection c = new ClassCollection("monday");	
 		String[] e0 = {"bar", "floor", "tramp", "disco"};
 		String[] e1 = {"ring", "gym"};
 		c.addClass("Jungle", "Joe", 1000, 1100, 15, e0);
 		c.addClass("Support", "Kat", 1100, 1200, 30, e1);
-		c.save();
+		c.save();*/
 	}
 
 	//create the main JFrame that holds all the JPanels
@@ -149,7 +153,7 @@ public class GUI extends JFrame{
 		dSched.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(dSched);
 		dSched.setLayout(null);
-		
+
 		//create variables; class array for all the classes, class arrayList for ease of adding and removing, and then
 		//a string array for the equipment
 		final ClassCollection c = new ClassCollection(day);	
@@ -157,7 +161,7 @@ public class GUI extends JFrame{
 		final Class[] allClasses = c.getClasses();
 		final ArrayList<Class> neededClasses = new ArrayList<Class>();
 		final String[] allEquip = eq.getEquipmentList();
-		
+
 		final JComboBox<String> classBox = new JComboBox<String>();
 		classBox.setBounds(12, 13, 200, 37);
 		dSched.add(classBox);
@@ -187,7 +191,7 @@ public class GUI extends JFrame{
 		for (int x=0; x < neededClasses.size(); x++){
 			txtSched.append(neededClasses.get(x).getName());
 		}//add the class names of the class you added to the "to-be-scheduled" 
-		
+
 		JButton btnAdd = new JButton("Add -->");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -200,7 +204,7 @@ public class GUI extends JFrame{
 		});//add to the needed arrayList, and then add them to the comboBox and textAreas appropriately
 		btnAdd.setBounds(224, 69, 127, 37);
 		dSched.add(btnAdd);
-		
+
 		JButton btnRemove = new JButton("Remove");
 		btnRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -256,12 +260,16 @@ public class GUI extends JFrame{
 				for (int x=0; x < allClasses.length; x++){
 					classBox.addItem(allClasses[x].getName());
 				}
+				txtClasses.setText("");
+				for (int x=0; x < allClasses.length; x++){
+					txtClasses.append(allClasses[x].getName() + "\n");
+				}
 				repaint();
 			}
 		});
 		btnDeleteClass.setBounds(224, 328, 127, 37);
 		dSched.add(btnDeleteClass);
-		
+
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -280,7 +288,7 @@ public class GUI extends JFrame{
 		clSched.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(clSched);
 		clSched.setLayout(null);
-		
+
 		//create variables; make a string array for all the equipment and an arrayList for adding and removing of equipment
 		final EquipmentCollection eq = new EquipmentCollection();
 		final ClassCollection c = new ClassCollection(day);
@@ -312,7 +320,7 @@ public class GUI extends JFrame{
 		JLabel lblS = new JLabel("Start:");
 		lblS.setBounds(12, 125, 84, 30);
 		clSched.add(lblS);
-		
+
 		final JTextField textE = new JTextField();
 		textE.setBounds(100, 180, 160, 40);
 		clSched.add(textE);
@@ -321,7 +329,7 @@ public class GUI extends JFrame{
 		JLabel lblE = new JLabel("End:");
 		lblE.setBounds(12, 180, 84, 30);
 		clSched.add(lblE);
-		
+
 		final JTextField textR = new JTextField();
 		textR.setBounds(100, 235, 160, 40);
 		clSched.add(textR);
@@ -330,14 +338,14 @@ public class GUI extends JFrame{
 		JLabel lblR = new JLabel("Rotations:");
 		lblR.setBounds(12, 235, 84, 30);
 		clSched.add(lblR);
-		
+
 		final JComboBox<String> comboBoxEquip = new JComboBox<String>();
 		comboBoxEquip.setBounds(324, 30, 200, 22);
 		clSched.add(comboBoxEquip);
 		for (int x=0; x < allEquipment.length; x++){
 			comboBoxEquip.addItem(allEquipment[x].toString());
 		}//add equipment into the top comboBox
-		
+
 		final JComboBox<String> cbNEquip = new JComboBox<String>();
 		cbNEquip.setBounds(324, 90, 200, 22);
 		clSched.add(cbNEquip);
@@ -363,7 +371,7 @@ public class GUI extends JFrame{
 		});
 		btnAdd.setBounds(310, 60, 97, 25);
 		clSched.add(btnAdd);
-		
+
 		JButton btnRem = new JButton("Remove");
 		btnRem.addActionListener(new ActionListener() {
 			//action listener for the add button (to add from drop down box to the text area)
@@ -384,7 +392,7 @@ public class GUI extends JFrame{
 		});
 		btnRem.setBounds(430, 60, 97, 25);
 		clSched.add(btnRem);
-		
+
 		JButton btnMenu = new JButton("Back");
 		btnMenu.addActionListener(new ActionListener() {
 			//action listener for the menu button; takes you back to day sched
@@ -395,7 +403,7 @@ public class GUI extends JFrame{
 		});
 		btnMenu.setBounds(22, 350, 195, 34);
 		clSched.add(btnMenu);
-		
+
 		JButton btnSched = new JButton("Create!");
 		btnSched.addActionListener(new ActionListener() {
 			//action listener for the schedule button
@@ -407,10 +415,29 @@ public class GUI extends JFrame{
 				int st = Integer.parseInt(textS.getText());
 				int en = Integer.parseInt(textE.getText());
 				int ro = Integer.parseInt(textR.getText());
-				c.addClass(textClass.getText(), classDesc.getText(),  st, en, ro , needEquipArray);
-				c.save();
-				clSched.setVisible(false);
-				daySched();//take us back to the day scheduling
+
+				//Test the rotations amount and equipment amount
+				final Time t = new Time();
+				int rotations = Time.numOfRotationsNeeded(st, en, ro);
+				int dif = en-st;
+				if (dif % rotations == 0){//make sure that time divided by the rotation time is possible using modulo to test for remainder
+					if (rotations == needEquipArray.length){
+						c.addClass(textClass.getText(), classDesc.getText(),  st, en, ro , needEquipArray);
+						c.save();
+						clSched.setVisible(false);
+						daySched();//take us back to the day scheduling if successful
+					}
+					else {
+						//display an error optionPane for missing equipment
+						JOptionPane frame = new JOptionPane();
+						JOptionPane.showMessageDialog(frame, "You do not have enough equipment for " + rotations + " rotations.", "Class Creation Error", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+				else{
+					//display an error optionPane for not having a valid time and rotation amount
+					JOptionPane frame = new JOptionPane();
+					JOptionPane.showMessageDialog(frame, "You do not have a proper time  frame for your rotations.", "Class Creation Error", JOptionPane.WARNING_MESSAGE);
+				}
 			}
 		});//grab all the variables and pass them into the createClass method
 		btnSched.setBounds(22, 400, 195, 34);
@@ -426,7 +453,7 @@ public class GUI extends JFrame{
 		});
 		btnNewEquip.setBounds(330, 350, 195, 34); 
 		clSched.add(btnNewEquip);
-		
+
 
 		JButton btnDelEquip = new JButton("Delete Equipment");
 		btnDelEquip.addActionListener(new ActionListener() {
@@ -455,7 +482,7 @@ public class GUI extends JFrame{
 		aEquip.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(aEquip);
 		aEquip.setLayout(null);
-		
+
 		//create variables
 		final EquipmentCollection eq = new EquipmentCollection();
 
