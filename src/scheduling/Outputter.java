@@ -141,7 +141,7 @@ public class Outputter
 		try 
 		{
 			/*
-			 * Below is a small gui piece to allow the user to select a save location and name
+			 * Below is a small gui piece to allow the user to select a save location and name for the file
 			 */
 			
 			JFileChooser saveFile = new JFileChooser();
@@ -158,11 +158,9 @@ public class Outputter
 			
 		} catch (FileNotFoundException e) 
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

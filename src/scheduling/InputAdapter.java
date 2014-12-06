@@ -1,7 +1,9 @@
 package scheduling;
 
 /*
- * This is the interface for the input adapters
+ * This is the interface for the input adapters.
+ * It is created as an abstract class so that it can have some shared methods
+ * that all adapters can use.
  * created by Matt Detrick
  * 12/2/14
  */
