@@ -24,13 +24,12 @@ public class EquipmentCollection
 	{
 		try 
 		{
-			Scanner scan; 
 			BufferedReader reader = new BufferedReader(new FileReader("equipment.txt"));
 			String line=null;
 			while ((line = reader.readLine()) != null) 
 			{
-				scan = new Scanner(line);
-				add(scan.next(), scan.next());
+				String[] values = line.split("_");
+				add(values[0], values[1]);
 			}
 			reader.close();
 		}
@@ -95,7 +94,7 @@ public class EquipmentCollection
 				while(keys.hasNext())
 				{
 					Equipment e = equipList.get(keys.next());
-					out.write(e.getName()+" "+e.getDesc()+"\n");
+					out.write(e.getName()+"_"+e.getDesc()+"\n");
 				}
 				out.close();
 			} catch (IOException e) {
