@@ -1,11 +1,13 @@
 package scheduling;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+
 
 
 /*
@@ -139,19 +141,21 @@ public class Outputter
 		try 
 		{
 			/*
-			 * Below is the starting of trying to get a save location gui going.
+			 * Below is a small gui piece to allow the user to select a save location and name
 			 */
-			/*
+			
 			JFileChooser saveFile = new JFileChooser();
+			saveFile.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 			int selection =saveFile.showSaveDialog(null);
-			if (selection == JFileChooser.APPROVE_OPTION) {
-				   System.out.println(saveFile.getName());
+			if (selection == JFileChooser.APPROVE_OPTION)
+			{
+			   File file = saveFile.getSelectedFile();
+			   fileOut = new FileOutputStream(file.getPath()+".xls");
+			   wb.write(fileOut);
+				fileOut.close();
 			}
-			*/
-			String save=JOptionPane.showInputDialog("Save as: ");
-			fileOut = new FileOutputStream(save+".xls");
-			wb.write(fileOut);
-			fileOut.close();
+			
+			
 		} catch (FileNotFoundException e) 
 		{
 			// TODO Auto-generated catch block
