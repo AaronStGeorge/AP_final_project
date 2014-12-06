@@ -55,14 +55,6 @@ public class GUI extends JFrame{
 				}
 			}	
 		});
-		//testing
-		/*ClassCollection c = new ClassCollection("monday");	
-		String[] e0 = {"bar", "floor", "tramp", "disco"};
-		c.addClass("Welcome To The Jungle", "Joe Bob Jean", 1000, 1100, 15, e0);
-		c.save();
-		/*EquipmentCollection eq = new EquipmentCollection();
-		eq.addEquipment("bars", "bars");
-		eq.save();*/
 	}
 
 	//create the main JFrame that holds all the JPanels
@@ -229,6 +221,7 @@ public class GUI extends JFrame{
 		
 		JButton btnView = new JButton("View");
 		btnView.addActionListener(new ActionListener() {
+			//get the selected class object and display all of its constructor components in a JOptionPane
 			public void actionPerformed(ActionEvent arg0) {
 				int a = classBox.getSelectedIndex();
 				Class sc = (allClasses[a]);
@@ -237,7 +230,7 @@ public class GUI extends JFrame{
 				JOptionPane.showMessageDialog(viewPane, "Class Name: " + sc.getName() + "\nInstructor Name: " + sc.getTeacher() + "\nStart Time: " + sc.getStart() +
 						"\nEnd Time: " + sc.getEnd() + "\nRotation Time: " + sc.getRotation() + "\nEquipment: " + Arrays.toString(seq), "Class Information", JOptionPane.PLAIN_MESSAGE);
 			}
-		});//add to the needed arrayList, and then add them to the comboBox and textAreas appropriately
+		});
 		btnView.setBounds(224, 195, 127, 37);
 		dSched.add(btnView);
 
