@@ -9,8 +9,6 @@ package scheduling;
 public class RecursiveInput extends InputAdapter
 {
 	int[][][] possibilities;
-	String[] equipList;
-	Class[] classes;
     int equipListSize;
 
 	@Override
