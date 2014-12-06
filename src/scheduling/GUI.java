@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.JFrame;
 /*
@@ -193,7 +194,7 @@ public class GUI extends JFrame{
 			txtSched.append(neededClasses.get(x).getName());
 		}//add the class names of the class you added to the "to-be-scheduled" 
 
-		JButton btnAdd = new JButton("Add -->");
+		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int a = classBox.getSelectedIndex();
@@ -225,6 +226,20 @@ public class GUI extends JFrame{
 		});
 		btnRemove.setBounds(224, 119, 127, 37);
 		dSched.add(btnRemove);
+		
+		JButton btnView = new JButton("View");
+		btnView.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int a = classBox.getSelectedIndex();
+				Class sc = (allClasses[a]);
+				String[] seq = sc.getEquipment();
+				JOptionPane viewPane = new JOptionPane();
+				JOptionPane.showMessageDialog(viewPane, "Class Name: " + sc.getName() + "\nInstructor Name: " + sc.getTeacher() + "\nStart Time: " + sc.getStart() +
+						"\nEnd Time: " + sc.getEnd() + "\nRotation Time: " + sc.getRotation() + "\nEquipment: " + Arrays.toString(seq), "Class Information", JOptionPane.PLAIN_MESSAGE);
+			}
+		});//add to the needed arrayList, and then add them to the comboBox and textAreas appropriately
+		btnView.setBounds(224, 195, 127, 37);
+		dSched.add(btnView);
 
 		JButton btnSchedule = new JButton("Schedule!");
 		btnSchedule.addActionListener(new ActionListener() {
