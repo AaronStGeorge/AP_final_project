@@ -3,6 +3,11 @@ package scheduling;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
+
 /*
  * These are used to output the schedule as a .xls file
  */
@@ -133,7 +138,18 @@ public class Outputter
 		 FileOutputStream fileOut=null;
 		try 
 		{
-			fileOut = new FileOutputStream("schedule.xls");
+			/*
+			 * Below is the starting of trying to get a save location gui going.
+			 */
+			/*
+			JFileChooser saveFile = new JFileChooser();
+			int selection =saveFile.showSaveDialog(null);
+			if (selection == JFileChooser.APPROVE_OPTION) {
+				   System.out.println(saveFile.getName());
+			}
+			*/
+			String save=JOptionPane.showInputDialog("Save as: ");
+			fileOut = new FileOutputStream(save+".xls");
 			wb.write(fileOut);
 			fileOut.close();
 		} catch (FileNotFoundException e) 
