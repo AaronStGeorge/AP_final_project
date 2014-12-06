@@ -83,10 +83,7 @@ public abstract class InputAdapter
 		for (int i = 0; i < equipment.length; i++) {
 			int j = 0;
 			while (!equipment[i].equals(equipList[j]))
-			{
-				System.out.println(equipment[i]+"!="+equipList[j]);
 				j++;
-			}
 			indexes[i] = j;
 		}
 		return indexes;
