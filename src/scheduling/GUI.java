@@ -30,7 +30,7 @@ import javax.swing.JFrame;
  * clSched: takes user input for all the required constructor pieces to create a new class object
  * aEquip: takes in user input for all required pieces to create an equipment object
  * --------------------------------------------------------------------------------------------------------------------------
- * Created by: Coby Greenhagen, finished on 12/4/14
+ * Created by: Coby Greenhagen
  */
 
 public class GUI extends JFrame{
@@ -57,10 +57,11 @@ public class GUI extends JFrame{
 		//testing
 		/*ClassCollection c = new ClassCollection("monday");	
 		String[] e0 = {"bar", "floor", "tramp", "disco"};
-		String[] e1 = {"ring", "gym"};
 		c.addClass("Jungle", "Joe", 1000, 1100, 15, e0);
-		c.addClass("Support", "Kat", 1100, 1200, 30, e1);
-		c.save();*/
+		c.save();
+		EquipmentCollection eq = new EquipmentCollection();
+		eq.addEquipment("bars", "bars");
+		eq.save();*/
 	}
 
 	//create the main JFrame that holds all the JPanels
@@ -417,10 +418,9 @@ public class GUI extends JFrame{
 				int ro = Integer.parseInt(textR.getText());
 
 				//Test the rotations amount and equipment amount
-				final Time t = new Time();
+				int totTime = Time.getTotalTime(st, en);
 				int rotations = Time.numOfRotationsNeeded(st, en, ro);
-				int dif = en-st;
-				if (dif % rotations == 0){//make sure that time divided by the rotation time is possible using modulo to test for remainder
+				if (totTime % rotations == 0){//make sure that time divided by the rotation time is possible using modulo to test for remainder
 					if (rotations == needEquipArray.length){
 						c.addClass(textClass.getText(), classDesc.getText(),  st, en, ro , needEquipArray);
 						c.save();
