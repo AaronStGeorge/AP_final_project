@@ -94,7 +94,7 @@ public class EquipmentCollection
 				while(keys.hasNext())
 				{
 					Equipment e = equipList.get(keys.next());
-					out.write(e.getName()+"_"+e.getDesc()+"\n");
+					out.write(validate(e.getName())+"_"+validate(e.getDesc())+"\n");
 				}
 				out.close();
 			} catch (IOException e) {
@@ -104,5 +104,10 @@ public class EquipmentCollection
 			System.out.println("Equipment changes saved");
 
 		}
+	}
+	
+	private String validate(String v)
+	{
+		return v.replaceAll("_", " ");
 	}
 }

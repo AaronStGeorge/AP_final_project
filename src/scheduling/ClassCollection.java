@@ -105,7 +105,7 @@ public class ClassCollection
 				while(keys.hasNext())
 				{
 					Class c = classList.get(keys.next());
-					out.write(c.getName()+"_"+c.getTeacher()+"_"+c.getStart()+"_"+c.getEnd()+"_"+c.getRotation()+"_");
+					out.write(validate(c.getName())+"_"+validate(c.getTeacher())+"_"+c.getStart()+"_"+c.getEnd()+"_"+c.getRotation()+"_");
 					String[] e = c.getEquipment();
 					for(int i=0;i<e.length;i++)
 					{
@@ -120,6 +120,11 @@ public class ClassCollection
 			System.out.println("Class changes saved");
 
 		}
+	}
+	
+	private String validate(String v)
+	{
+		return v.replaceAll("_", " ");
 	}
 
 }
