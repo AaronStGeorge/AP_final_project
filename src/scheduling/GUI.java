@@ -57,9 +57,9 @@ public class GUI extends JFrame{
 		//testing
 		/*ClassCollection c = new ClassCollection("monday");	
 		String[] e0 = {"bar", "floor", "tramp", "disco"};
-		c.addClass("Jungle", "Joe", 1000, 1100, 15, e0);
+		c.addClass("Welcome To The Jungle", "Joe Bob Jean", 1000, 1100, 15, e0);
 		c.save();
-		EquipmentCollection eq = new EquipmentCollection();
+		/*EquipmentCollection eq = new EquipmentCollection();
 		eq.addEquipment("bars", "bars");
 		eq.save();*/
 	}
